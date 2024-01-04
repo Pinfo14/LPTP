@@ -1,0 +1,3 @@
+/home/emanuel/Desktop/1ºSemestre/LPTP/cmake-build-debug/CMakeFiles/LPTP.dir
+/home/emanuel/Desktop/1ºSemestre/LPTP/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/emanuel/Desktop/1ºSemestre/LPTP/cmake-build-debug/CMakeFiles/rebuild_cache.dir
