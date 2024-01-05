@@ -14,5 +14,10 @@ int main() {
     business->business=(BUS_LINE*) malloc(sizeof(BUS_LINE)*3 );
     business->count=0;
     mainMenu(companies,*companies,business);
+
+    free(companies);
+    free(companies->company);
+    free(business);
+    free(business->business);
     return 0;
 }

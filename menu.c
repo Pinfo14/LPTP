@@ -80,7 +80,7 @@ void manageComp(COMPANIES *company,COMPANIES companies,BUSINESS *business){
                 //manageComp();
                 break;
             case 3:
-                listComp(companies);
+                listComp(companies,*business);
                 manageComp(company,companies,business);
                 break;
             case 4:

@@ -58,7 +58,7 @@ void insertComp(COMPANIES *companies,BUSINESS *business);
 void updateComp(COMPANIES *companies);
 void deleteComp(COMPANIES *companies);
 void searchComp(COMPANIES companies);
-void listComp(COMPANIES companies);
+void listComp(COMPANIES companies,BUSINESS business);
 
 
 

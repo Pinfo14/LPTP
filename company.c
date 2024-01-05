@@ -8,10 +8,10 @@
 #include "company.h"
 #include "input.h"
 
- char *showBLine(int bl){
-     BUSINESS **business ;
-    char *name;
-    for (int i = 0; i < (*business)->count; ++i) {
+ char *showBLine(int bl,BUSINESS **business){
+
+     char *name=(char*)malloc(sizeof(char)*10);
+    for (int i = 0;(*business)->count > i; ++i) {
         if(bl ==(*business)->business[i].id){
             strcpy(name, (*business)->business[i].name);
 
@@ -19,16 +19,18 @@
     }
      return name;
 }
-void printComp(COMPANY company) {
-    printf("%d   %s   %d   %d   %s %s %s   %d",company.nif,company.name,company.category, showBLine(company.business_line),company.address.street,company.address.CP,company.address.city,company.state);
+void printComp(COMPANY company,BUSINESS *business) {
+    char *busLine=showBLine(company.business_line,&business);
+    printf("%d   %s   %d   %s   %s %s %s   %d",company.nif,company.name,company.category,busLine ,company.address.street,company.address.CP,company.address.city,company.state);
+   free(busLine);
 }
 
 
-void listComp(COMPANIES companies) {
+void listComp(COMPANIES companies,BUSINESS business) {
     if (companies.count > 0) {
         int i;
         for (i = 0; i < companies.count; i++) {
-            printComp(companies.company[i]);
+            printComp(companies.company[i],&business);
         }
     } else {
         puts("ja foste");
