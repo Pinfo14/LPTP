@@ -20,6 +20,7 @@
 #define NIF_MAX 999999
 #define CATG_MIN 1
 #define CATG_MAX 3
+#define CP_MAX 8
 #define NIF_MSG "Insert NIF: "
 #define  COMP_NAME "Insert company name: "
 #define COMP_CATG "Insert the company Category 1-->micro  2-->pme  3-->big: "
@@ -36,7 +37,7 @@ typedef enum{INACTIVE,ACTIVE}STATE;
 typedef struct {
     char street[CHAR_MAX];
     char city[CHAR_MAX];
-    char CP[8];
+    char cp[CP_MAX];
 }ADDRESS;
 
 typedef struct {
@@ -55,7 +56,7 @@ typedef struct {
 
 //COMPANIES
 void insertComp(COMPANIES *companies,BUSINESS *business);
-void updateComp(COMPANIES *companies);
+void updateComps(COMPANIES *companies,BUSINESS *business);
 void deleteComp(COMPANIES *companies);
 void searchComp(COMPANIES companies);
 void listComp(COMPANIES companies,BUSINESS business);

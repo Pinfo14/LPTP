@@ -36,7 +36,7 @@ int searchBus(BUSINESS business, int id) {
 //INSERT COMP
 int insertBusLines(BUSINESS *business) {
     int id;
-    id= getInt(NIF_MIN,NIF_MAX,"Insert the id: ");
+    id= getInt(NIF_MIN,NIF_MAX,ID_MSG);
 
     if (searchBus(*business, id) == -1) {
 
@@ -52,11 +52,25 @@ int insertBusLines(BUSINESS *business) {
 
 
 void insertBusLine(BUSINESS *business) {
-    if (business->count < 2) {
+    if (business->count < 5) {
         if (insertBusLines(business) == -1) {
             puts(ERROR);
         }
     } else {
         puts(ERROR);
     }
+}
+
+void updateBusLines(BUS_LINE *business){
+    getString(business->name,CHAR_MAX,BUS_NAME);
+}
+void updateBusLine(BUSINESS *business){
+
+    int position =searchBus( *business,getInt(ID_MIN,ID_MAX,ID_MSG));
+    if(position !=-1) {
+        updateBusLines(&business->business[position]);
+    } else{
+        printf("ERROO NOT FOUND !!!");
+    }
+
 }

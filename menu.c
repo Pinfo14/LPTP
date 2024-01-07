@@ -77,18 +77,19 @@ void manageComp(COMPANIES *company,COMPANIES companies,BUSINESS *business){
                 manageComp(company,companies,business);
                 break;
             case 2:
-                //manageComp();
+                updateComps(&companies,&business);
+                manageComp(company,companies,business);
                 break;
             case 3:
                 listComp(companies,*business);
                 manageComp(company,companies,business);
                 break;
             case 4:
-                deleteComp(&companies);
+                //deleteComp(&companies);
                 manageComp(company,companies,business);
                 break;
             case 5:
-                mainMenu(company,companies,business);
+                adminMenu(company,companies,business);
 
                 break;
             default:
@@ -116,7 +117,8 @@ void manageBusLine(COMPANIES *company,COMPANIES companies,BUSINESS *business){
                 manageBusLine(company,companies,business);
                 break;
             case 2:
-                //manageComp();
+                updateBusLine(business);
+                manageBusLine(company,companies,business);
                 break;
             case 3:
                 listBusLine(business);
@@ -127,7 +129,7 @@ void manageBusLine(COMPANIES *company,COMPANIES companies,BUSINESS *business){
                 manageBusLine(company,companies,business);
                 break;
             case 5:
-                mainMenu(company,companies,business);
+                adminMenu(company,companies,business);
 
                 break;
             default:

@@ -21,7 +21,7 @@
 }
 void printComp(COMPANY company,BUSINESS *business) {
     char *busLine=showBLine(company.business_line,&business);
-    printf("%d   %s   %d   %s   %s %s %s   %d",company.nif,company.name,company.category,busLine ,company.address.street,company.address.CP,company.address.city,company.state);
+    printf("%d   %s   %d   %s   %s %s %s   %d",company.nif,company.name,company.category,busLine ,company.address.street,company.address.cp,company.address.city,company.state);
    free(busLine);
 }
 
@@ -77,7 +77,7 @@ int insertComps(COMPANIES *companies,BUSINESS *business) {
         insertCompBus(companies,business);
         getString(companies->company[companies->count].address.street,CHAR_MAX,COMP_STREET);
         getString(companies->company[companies->count].address.city,CHAR_MAX,COMP_CITY);
-        getString(companies->company[companies->count].address.CP,8,COMP_CP);
+        getString(companies->company[companies->count].address.cp,CP_MAX,COMP_CP);
         companies->company[companies->count].state= getInt(0,1,COMP_STATE);
         return companies->count++;
     }
@@ -100,7 +100,7 @@ void deleteCompData(COMPANY *company) {
     strcpy(company->name,"");
     strcpy(company->address.city,"");
     strcpy(company->address.street,"");
-    strcpy(company->address.CP,"");
+    strcpy(company->address.cp,"");
     company->business_line=0;
     company->category=0;
     company->state=-1;
@@ -118,5 +118,36 @@ void deleteComp(COMPANIES *companies){
         companies->count--;
     }else{
         printf("COMPANY DON'T EXIST");
+    }
+}
+void updateBLComp(COMPANY *company,BUSINESS **business){
+    int bus_line;
+    do {
+        listBusLine(*business);
+        bus_line=getInt(ID_MIN,ID_MAX,BUSINESS_LINE);
+        for (int i = 0; i < (*business)->count; ++i) {
+            if(bus_line == (*business)->business->id){
+               company->business_line = bus_line;
+            }
+        }
+    } while (bus_line!=(*business)->business->id);
+}
+void updateComp(COMPANY *company,BUSINESS *business) {
+    getString(company->name, CHAR_MAX, COMP_NAME);
+    company->category=getInt(CATG_MIN,CATG_MAX,COMP_CATG);
+    updateBLComp(company,&business);
+    getString(company->address.street,CHAR_MAX,COMP_STREET);
+    getString(company->address.city,CHAR_MAX,COMP_CITY);
+    getString(company->address.cp,CP_MAX,COMP_CP);
+    company->state= getInt(0,1,COMP_STATE);
+}
+
+void updateComps(COMPANIES *companies,BUSINESS *business) {
+    int position = searchComps(*companies, getInt(NIF_MIN ,NIF_MAX, NIF_MSG));
+
+    if (position != -1) {
+        updateComp(&companies->company[position], business);
+    } else {
+        puts("ERROR COMPANY NOT FOUND!!");
     }
 }
