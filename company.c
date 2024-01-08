@@ -51,23 +51,39 @@ void searchComp(COMPANIES companies) {
 
 
 }
-void insertCompBus(COMPANIES *companies, BUSINESS **busLine){
+void insertCompBus(COMPANIES *companies, BUSINESS *busLine) {
     int bus_line;
-    do {
-        listBusLine(*busLine);
-        bus_line=getInt(ID_MIN,ID_MAX,BUSINESS_LINE);
-        for (int i = 0; i < (*busLine)->count; ++i) {
-            if(bus_line == (*busLine)->business->id){
+    int found = 0;
+   do {
+        listBusLine(busLine);
+        bus_line = getInt(ID_MIN, ID_MAX, BUSINESS_LINE);
+
+        // Assume bus_line is not found initially
+
+
+        for (int i = 0; i < busLine->count; ++i) {
+            if (bus_line == busLine->business[i].id) {
                 companies->company[companies->count].business_line = bus_line;
+                found = 1;
+                // Exit the loop after finding a match
+                break;
             }
         }
-    } while (bus_line!=(*busLine)->business->id);
+
+        // If bus_line is not found, you might want to handle that case
+        if (!found) {
+
+            printf("Invalid business line. Please try again.\n");
+        }
+
+    } while (found!=1);
 }
+
 //INSERT COMP
 int insertComps(COMPANIES *companies,BUSINESS *business) {
     int nif;
 
-    nif= getInt(NIF_MIN,NIF_MAX,"Insert the company NIF: ");
+    nif= getInt(NIF_MIN,NIF_MAX,NIF_MSG);
 
     if (searchComps(*companies, nif) == -1) {
 
@@ -120,17 +136,32 @@ void deleteComp(COMPANIES *companies){
         printf("COMPANY DON'T EXIST");
     }
 }
-void updateBLComp(COMPANY *company,BUSINESS **business){
+void updateBLComp(COMPANY *company,BUSINESS *business){
     int bus_line;
+    int found=0;
     do {
-        listBusLine(*business);
-        bus_line=getInt(ID_MIN,ID_MAX,BUSINESS_LINE);
-        for (int i = 0; i < (*business)->count; ++i) {
-            if(bus_line == (*business)->business->id){
-               company->business_line = bus_line;
+        listBusLine(business);
+        bus_line = getInt(ID_MIN, ID_MAX, BUSINESS_LINE);
+
+        // Assume bus_line is not found initially
+
+
+        for (int i = 0; i < business->count; ++i) {
+            if (bus_line == business->business[i].id) {
+             company->business_line = bus_line;
+                found = 1;
+                // Exit the loop after finding a match
+                break;
             }
         }
-    } while (bus_line!=(*business)->business->id);
+
+        // If bus_line is not found, you might want to handle that case
+        if (!found) {
+
+            printf("Invalid business line. Please try again.\n");
+        }
+
+    } while (found!=1);
 }
 void updateComp(COMPANY *company,BUSINESS *business) {
     getString(company->name, CHAR_MAX, COMP_NAME);
