@@ -58,7 +58,7 @@ typedef struct {
 void insertComp(COMPANIES *companies,BUSINESS *business);
 void updateComps(COMPANIES *companies,BUSINESS *business);
 void deleteComp(COMPANIES *companies);
-void searchComp(COMPANIES companies);
+void searchComp(COMPANIES companies,BUSINESS *business);
 void listComp(COMPANIES companies,BUSINESS business);
 
 

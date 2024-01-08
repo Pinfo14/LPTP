@@ -21,4 +21,5 @@ void adminMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business);
 void manageComp(COMPANIES *company,COMPANIES companies,BUSINESS *business);
 void manageBusLine(COMPANIES *company,COMPANIES companies,BUSINESS *business);
 void userMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business);
+void searchMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business);
 #endif //TP_LP_MENU_H

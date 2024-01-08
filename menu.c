@@ -139,6 +139,7 @@ void manageBusLine(COMPANIES *company,COMPANIES companies,BUSINESS *business){
     exit(1);
 
 }
+
 void userMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business){
     int userOp;
     do {
@@ -154,7 +155,8 @@ void userMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business){
 
         switch (userOp) {
             case 1:
-                //pesquisarEmpresas(empresas, numEmpresas);
+                searchComp(companies,business);
+                //userMenu(company,companies,business);
                 break;
             case 2:
                 //classificarEmpresa(empresas, numEmpresas);
@@ -169,6 +171,34 @@ void userMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business){
                 printf("ERROORR!!\n");
         }
 
+    } while (userOp != 0);
+    exit(1);
+}
+void searchMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business){
+    int userOp;
+    do {
+
+        printf("\nSEARCH MENU\n");
+        printf("1. Rate company\n");
+        printf("2. Comment company\n");
+        printf("3. Go back\n");
+        printf("0. EXIT\n");
+        printf("CHOOSE OPTION: ");
+        scanf("%d", &userOp);
+        switch (userOp) {
+            case 1:
+
+                //userMenu(company,companies,business);
+                break;
+            case 2:
+                //classificarEmpresa(empresas, numEmpresas);
+                break;
+            case 3:
+                userMenu(company,companies,business);
+                break;
+            default:
+                printf("ERROORR!!\n");
+        }
     } while (userOp != 0);
     exit(1);
 }

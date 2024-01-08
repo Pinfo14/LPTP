@@ -8,6 +8,40 @@
 #include "company.h"
 #include "input.h"
 
+
+char *showState(int state){
+    char*stateChar=(char*) malloc(sizeof(char)*10 );
+    switch (state) {
+        case 0:
+            strcpy(stateChar,"INACTIVE");
+            break;
+        case 1:
+            strcpy(stateChar,"ACTIVE");
+            break;
+        default:
+            printf("EROOR");
+    }
+    return stateChar;
+}
+// used to show de category name instead of the representative number
+char *showCatg(int catg){
+    char *catgName=(char*) malloc(sizeof(char)*10 );
+    switch (catg) {
+        case 1:
+            strcpy(catgName,"Micro");
+            break;
+        case 2:
+            strcpy(catgName,"PME");
+            break;
+        case 3:
+            strcpy(catgName,"Big");
+            break;
+        default:
+            printf("EROOR");
+    }
+    return catgName;
+}
+// used to show the category instead of the id
  char *showBLine(int bl,BUSINESS **business){
 
      char *name=(char*)malloc(sizeof(char)*10);
@@ -21,8 +55,12 @@
 }
 void printComp(COMPANY company,BUSINESS *business) {
     char *busLine=showBLine(company.business_line,&business);
-    printf("%d   %s   %d   %s   %s %s %s   %d",company.nif,company.name,company.category,busLine ,company.address.street,company.address.cp,company.address.city,company.state);
+    char *catgName=showCatg(company.category);
+    char *state= showState(company.state);
+    printf("%d   %s   %s   %s   %s %s %s   %s",company.nif,company.name, catgName,busLine ,company.address.street,company.address.cp,company.address.city,state);
    free(busLine);
+   free(catgName);
+   free(state);
 }
 
 
@@ -47,8 +85,14 @@ int searchComps(COMPANIES companies, int nif) {
     return -1;
 }
 
-void searchComp(COMPANIES companies) {
+void searchComp(COMPANIES companies,BUSINESS *business) {
+    int position = searchComps(companies, getInt(NIF_MIN, NIF_MAX, NIF_MSG));
 
+    if (position != -1) {
+        printComp(companies.company[position],business);
+    } else {
+        puts(ERROR);
+    }
 
 }
 void insertCompBus(COMPANIES *companies, BUSINESS *busLine) {
