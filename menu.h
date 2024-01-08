@@ -1,6 +1,16 @@
-//
-// Created by emanuel on 21-12-2023.
-//
+/**
+* @file menu.h
+* @author Emanuel Pinto
+* @date 27-12-2023
+* @version 1
+*
+* @copyright Copyright (C) Emanuel 2023. All Rights MIT Licensed.
+*
+* @brief A header file providing utility functions for the main menu.
+*
+* This  file contains a collection of functions designed to make the menu and interact with it
+* in a C or C++ program. It includes functions for all the menu
+*/
 
 #ifndef TP_LP_MENU_H
 #define TP_LP_MENU_H

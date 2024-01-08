@@ -26,13 +26,7 @@ int getInt(int minVal,int maxVal,char*msg){
 
 }
 
-char getChar(char *msg) {
-    char value;
-    printf(msg);
-    value = getchar();
-    cleanInputBuffer();
-    return value;
-}
+
 
 void getString(char *string, unsigned int size, char *msg) {
     printf(msg);

@@ -1,8 +1,5 @@
 
 
-//
-// Created by emanuel on 03-01-2024.
-//
 #include "businessLines.h"
 #include "stdlib.h"
 #include "stdio.h"

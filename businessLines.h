@@ -1,6 +1,16 @@
-//
-// Created by emanuel on 03-01-2024.
-//
+/**
+* @file businessLines.h
+* @author Emanuel Pinto
+* @date 20-12-2023
+* @version 1
+*
+* @copyright Copyright (C) Emanuel 2023. All Rights MIT Licensed.
+*
+* @brief A header file providing utility functions for business line management.
+*
+* This  file contains a collection of functions designed to manage the business lines
+* in a C or C++ program. It includes functions for create, delete,update and read  lines of business
+*/
 
 #ifndef TP_LP_BUSINESSLINES_H
 #define TP_LP_BUSINESSLINES_H

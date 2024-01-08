@@ -55,7 +55,7 @@ void insertCompBus(COMPANIES *companies, BUSINESS **busLine){
     int bus_line;
     do {
         listBusLine(*busLine);
-        bus_line=getInt(1,800,BUSINESS_LINE);
+        bus_line=getInt(ID_MIN,ID_MAX,BUSINESS_LINE);
         for (int i = 0; i < (*busLine)->count; ++i) {
             if(bus_line == (*busLine)->business->id){
                 companies->company[companies->count].business_line = bus_line;
@@ -135,7 +135,7 @@ void updateBLComp(COMPANY *company,BUSINESS **business){
 void updateComp(COMPANY *company,BUSINESS *business) {
     getString(company->name, CHAR_MAX, COMP_NAME);
     company->category=getInt(CATG_MIN,CATG_MAX,COMP_CATG);
-    updateBLComp(company,&business);
+    updateBLComp(company,business);
     getString(company->address.street,CHAR_MAX,COMP_STREET);
     getString(company->address.city,CHAR_MAX,COMP_CITY);
     getString(company->address.cp,CP_MAX,COMP_CP);
