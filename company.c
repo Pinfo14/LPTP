@@ -7,8 +7,9 @@
 #include "string.h"
 #include "company.h"
 #include "input.h"
+#include "businessLines.h"
 
-
+// used to show de state INACTIVE or ACTIVE instead of 0 or 1
 char *showState(int state){
     char*stateChar=(char*) malloc(sizeof(char)*10 );
     switch (state) {
@@ -23,6 +24,7 @@ char *showState(int state){
     }
     return stateChar;
 }
+
 // used to show de category name instead of the representative number
 char *showCatg(int catg){
     char *catgName=(char*) malloc(sizeof(char)*10 );
@@ -86,7 +88,8 @@ int searchComps(COMPANIES companies, int nif) {
 }
 
 void searchComp(COMPANIES companies,BUSINESS *business) {
-    int position = searchComps(companies, getInt(NIF_MIN, NIF_MAX, NIF_MSG));
+    int nif = getInt(NIF_MIN, NIF_MAX, NIF_MSG);
+    int position = searchComps(companies,nif);
 
     if (position != -1) {
         printComp(companies.company[position],business);
@@ -98,29 +101,26 @@ void searchComp(COMPANIES companies,BUSINESS *business) {
 void insertCompBus(COMPANIES *companies, BUSINESS *busLine) {
     int bus_line;
     int found = 0;
-   do {
-        listBusLine(busLine);
-        bus_line = getInt(ID_MIN, ID_MAX, BUSINESS_LINE);
-
-        // Assume bus_line is not found initially
-
-
-        for (int i = 0; i < busLine->count; ++i) {
-            if (bus_line == busLine->business[i].id) {
-                companies->company[companies->count].business_line = bus_line;
-                found = 1;
-                // Exit the loop after finding a match
-                break;
+    if(busLine->count!=0) {
+        do {
+            listBusLine(busLine);
+            bus_line = getInt(ID_MIN, ID_MAX, BUSINESS_LINE);
+            for (int i = 0; i < busLine->count; ++i) {
+                if (bus_line == busLine->business[i].id) {
+                    companies->company[companies->count].business_line = bus_line;
+                    found = 1;
+                    break;
+                }
             }
-        }
+            if (!found) {
 
-        // If bus_line is not found, you might want to handle that case
-        if (!found) {
-
-            printf("Invalid business line. Please try again.\n");
-        }
-
-    } while (found!=1);
+                printf("Invalid business line. Please try again.\n");
+            }
+        } while (found != 1);
+    }else{
+        insertBusLine(busLine);
+        insertCompBus(companies,busLine);
+    }
 }
 
 //INSERT COMP
@@ -132,9 +132,10 @@ int insertComps(COMPANIES *companies,BUSINESS *business) {
     if (searchComps(*companies, nif) == -1) {
 
         companies->company[companies->count].nif = nif;
+        companies->company[companies->count].rate=0;
         getString(companies->company[companies->count].name,CHAR_MAX,COMP_NAME);
         companies->company[companies->count].category=getInt(CATG_MIN,CATG_MAX,COMP_CATG);
-        insertCompBus(companies,business);
+        insertCompBus(companies, business);
         getString(companies->company[companies->count].address.street,CHAR_MAX,COMP_STREET);
         getString(companies->company[companies->count].address.city,CHAR_MAX,COMP_CITY);
         getString(companies->company[companies->count].address.cp,CP_MAX,COMP_CP);
@@ -208,6 +209,8 @@ void updateBLComp(COMPANY *company,BUSINESS *business){
     } while (found!=1);
 }
 void updateComp(COMPANY *company,BUSINESS *business) {
+    float rating = company->rate;
+    company->rate =rating;
     getString(company->name, CHAR_MAX, COMP_NAME);
     company->category=getInt(CATG_MIN,CATG_MAX,COMP_CATG);
     updateBLComp(company,business);
@@ -224,5 +227,73 @@ void updateComps(COMPANIES *companies,BUSINESS *business) {
         updateComp(&companies->company[position], business);
     } else {
         puts("ERROR COMPANY NOT FOUND!!");
+    }
+}
+//comments
+
+char *showCompName(int nif,COMPANIES **company){
+
+    char *name=(char*)malloc(sizeof(char)*10);
+    for (int i = 0;(*company)->count > i; ++i) {
+        if(nif ==(*company)->company[i].nif){
+            strcpy(name, (*company)->company[i].name);
+
+        }
+    }
+    return name;
+}
+
+int verifyCompState(int nif,COMPANIES *companies){
+
+    for (int i = 0; i < companies->count; ++i) {
+        if(nif==companies->company[i].nif){
+            return companies->company[i].state;
+        }
+    }
+    return -1;
+}
+
+int verifyNif(int nif,COMPANIES *companies){
+    for (int i = 0; i < companies->count; ++i) {
+        if(nif== companies->company[i].nif){
+            return 1;
+        }
+    }
+    return -1;
+}
+
+void insertComms(COMMENT *comment,COMPANIES *companies){
+    int nif = getInt(NIF_MIN,NIF_MAX,NIF_MSG);
+
+    if(verifyCompState(nif,companies) == 1 && verifyNif(nif,companies)==1){
+        comment->compNif=nif;
+        getString(comment->userName,USER_NAME_MAX,NAME_MSG);
+        getString(comment->userEmail,EMAIL_MAX,EMAIL_MSG);
+        getString(comment->comment,COMMENT_MAX,COMMENT_MSG);
+    }else{
+        printf("ERRORR DOEN'T EXIST");
+    }
+}
+void insertComm(COMMENTS *comment,COMPANIES *companies){
+
+    insertComms(comment,companies);
+    comment->count++;
+}
+
+void printComm(COMMENTS *comment,COMPANIES *company){
+    int nif=comment->comment->compNif;
+    char *compName = showCompName(nif,&company);
+    printf("%s  %s  %s  %s", compName,comment->comment->userName,comment->comment->userEmail,comment->comment->comment);
+    free(compName);
+}
+
+//rating
+
+void insertRating(COMPANIES*companies,RATINGS*ratings){
+    int nif = getInt(NIF_MIN,NIF_MAX,NIF_MSG);
+    if(verifyCompState(nif,companies) == 1 && verifyNif(nif,companies)==1) {
+        ratings->rating->comNif = nif;
+        ratings->rating->rating = getInt(RATE_MIN, RATE_MAX, RATE_MSG);
+        ratings->count++;
     }
 }

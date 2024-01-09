@@ -14,9 +14,8 @@
 
 #ifndef TP_LP_BUSINESSLINES_H
 #define TP_LP_BUSINESSLINES_H
-//#include "company.h"
-#define  ID_MSG "Insert the id: "
-#define BUS_NAME "Insert businesess line name: "
+#define  ID_MSG "Insert the  business line id: "
+#define BUS_NAME "Insert  business line name: "
 #define CHAR_MAX 100
 #define ID_MIN 1
 #define ID_MAX 9999

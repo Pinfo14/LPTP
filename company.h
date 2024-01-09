@@ -21,6 +21,13 @@
 #define CATG_MIN 1
 #define CATG_MAX 3
 #define CP_MAX 8
+#define RATE_MAX 5
+#define RATE_MIN 1
+#define USER_NAME_MAX  20
+#define EMAIL_MAX  30
+#define COMMENT_MAX  100
+
+#define RATE_MSG "Rate 1 to 5: "
 #define NIF_MSG "Insert NIF: "
 #define  COMP_NAME "Insert company name: "
 #define COMP_CATG "Insert the company Category 1-->micro  2-->pme  3-->big: "
@@ -29,6 +36,9 @@
 #define  COMP_CITY "Insert the city: "
 #define COMP_CP "Insert the CP: "
 #define COMP_STATE "Company state: "
+#define NAME_MSG "Enter your name: "
+#define EMAIL_MSG "Enter your email: "
+#define COMMENT_MSG "Comment: "
 
 typedef enum{MICRO=1,PME,BIG}CATEGORY;
 typedef enum{INACTIVE,ACTIVE}STATE;
@@ -42,6 +52,7 @@ typedef struct {
 
 typedef struct {
     unsigned int nif;
+    float rate;
     char name[CHAR_MAX];
     CATEGORY category;
     int business_line;
@@ -54,13 +65,42 @@ typedef struct {
     COMPANY *company;
 }COMPANIES;
 
+typedef struct {
+    char userName[USER_NAME_MAX];
+    char userEmail[EMAIL_MAX];
+    char comment[COMMENT_MAX];
+    int compNif;
+}COMMENT;
+
+typedef struct {
+    int count;
+    COMMENT *comment;
+}COMMENTS;
+
+
+typedef struct{
+    int rating;
+    int comNif;
+}RATING;
+
+typedef struct {
+    int count;
+    RATING *rating;
+}RATINGS;
+
 //COMPANIES
 void insertComp(COMPANIES *companies,BUSINESS *business);
 void updateComps(COMPANIES *companies,BUSINESS *business);
 void deleteComp(COMPANIES *companies);
 void searchComp(COMPANIES companies,BUSINESS *business);
 void listComp(COMPANIES companies,BUSINESS business);
+//comment
 
+void insertComm(COMMENTS *comment,COMPANIES *companies);
+void printComm(COMMENTS *comment,COMPANIES *company);
+
+//RATING
+void insertRating(COMPANIES*companies,RATINGS *ratings);
 
 
 #endif //LPTP_COMPANY_H
