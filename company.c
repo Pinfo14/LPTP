@@ -254,30 +254,33 @@ int verifyCompState(int nif,COMPANIES *companies){
 }
 
 int verifyNif(int nif,COMPANIES *companies){
-    for (int i = 0; i < companies->count; ++i) {
-        if(nif== companies->company[i].nif){
+    for (int i = 0; i < companies->count; i++) {
+        if(nif == companies->company[i].nif){
             return 1;
         }
     }
     return -1;
 }
 
-void insertComms(COMMENT *comment,COMPANIES *companies){
+int insertComms(COMMENTS *comment,COMPANIES *companies){
     int nif = getInt(NIF_MIN,NIF_MAX,NIF_MSG);
 
-    if(verifyCompState(nif,companies) == 1 && verifyNif(nif,companies)==1){
-        comment->compNif=nif;
-        getString(comment->userName,USER_NAME_MAX,NAME_MSG);
-        getString(comment->userEmail,EMAIL_MAX,EMAIL_MSG);
-        getString(comment->comment,COMMENT_MAX,COMMENT_MSG);
-    }else{
-        printf("ERRORR DOEN'T EXIST");
+    if(verifyCompState(nif,companies) != -1 && verifyNif(nif,companies) !=-1){
+        comment->comment[comment->count].compNif =nif;
+        getString(comment->comment[comment->count].userName,USER_NAME_MAX,NAME_MSG);
+        getString(comment->comment[comment->count].userEmail,EMAIL_MAX,EMAIL_MSG);
+        getString(comment->comment[comment->count].comment,COMMENT_MAX,COMMENT_MSG);
+        return 1;
     }
+    return -1;
 }
-void insertComm(COMMENTS *comment,COMPANIES *companies){
 
-    insertComms(comment,companies);
-    comment->count++;
+void insertComm(COMMENTS *comment,COMPANIES *companies){
+    if(insertComms(comment,companies) !=-1){
+        comment->count++;
+    } else{
+        printf("ERRO ");
+    }
 }
 
 void printComm(COMMENTS *comment,COMPANIES *company){

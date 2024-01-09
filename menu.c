@@ -146,8 +146,6 @@ void userMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS
 
         printf("\nUSER MENU\n");
         printf("1. Search company\n");
-        printf("2. Rate company\n");
-        printf("3. Comment company\n");
         printf("4. Go back\n");
         printf("0. EXIT\n");
         printf("CHOOSE OPTION: ");
@@ -158,12 +156,7 @@ void userMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS
                 searchComp(companies,business);
                 searchMenu(company,companies,business,comments,ratings);
                 break;
-            case 2:
-                //classificarEmpresa(empresas, numEmpresas);
-                break;
-            case 3:
-                //comentarEmpresa(empresas, numEmpresas);
-                break;
+
             case 4:
                 mainMenu(company,companies,business,comments,ratings);
                 break;
@@ -193,7 +186,7 @@ void searchMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMEN
             case 2:
                 insertComm(comments,company);
                 searchMenu(company,companies,business,comments,ratings);
-                //classificarEmpresa(empresas, numEmpresas);
+
                 break;
             case 3:
                 printComm(comments,company);
