@@ -254,12 +254,14 @@ int verifyCompState(int nif,COMPANIES *companies){
 }
 
 int verifyNif(int nif,COMPANIES *companies){
+    int found =-1;
     for (int i = 0; i < companies->count; i++) {
         if(nif == companies->company[i].nif){
-            return 1;
+            found= 1;
+            break;
         }
     }
-    return -1;
+    return  found;
 }
 
 int insertComms(COMMENTS *comment,COMPANIES *companies){
