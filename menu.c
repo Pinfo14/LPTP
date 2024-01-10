@@ -180,16 +180,16 @@ void searchMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMEN
         scanf("%d", &userOp);
         switch (userOp) {
             case 1:
-                insertRating(company,ratings);
+                insertRating(companies,ratings);
                 searchMenu(company,companies,business,comments,ratings);
                 break;
             case 2:
-                insertComm(comments,company);
+                insertComm(comments,companies);
                 searchMenu(company,companies,business,comments,ratings);
 
                 break;
             case 3:
-                printComm(comments,company);
+               // printComm(comments,company);
                 userMenu(company,companies,business,comments,ratings);
                 break;
             default:

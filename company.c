@@ -59,10 +59,11 @@ void printComp(COMPANY company,BUSINESS *business) {
     char *busLine=showBLine(company.business_line,&business);
     char *catgName=showCatg(company.category);
     char *state= showState(company.state);
-    printf("%d   %s   %s   %s   %s %s %s   %s",company.nif,company.name, catgName,busLine ,company.address.street,company.address.cp,company.address.city,state);
-   free(busLine);
-   free(catgName);
-   free(state);
+    printf("%d   %s   %s   %s   %s %s %s   %s\n",company.nif,company.name, catgName,busLine ,company.address.street,company.address.cp,company.address.city,state);
+
+    free(busLine);
+    free(catgName);
+    free(state);
 }
 
 
@@ -147,7 +148,7 @@ int insertComps(COMPANIES *companies,BUSINESS *business) {
 
 
 void insertComp(COMPANIES *companies,BUSINESS *business) {
-    if (companies->count < 2) {
+    if (companies->count < 10) {
         if (insertComps(companies,business) == -1) {
             puts(ERROR);
         }
@@ -243,31 +244,22 @@ char *showCompName(int nif,COMPANIES **company){
     return name;
 }
 
-int verifyCompState(int nif,COMPANIES *companies){
 
-    for (int i = 0; i < companies->count; ++i) {
-        if(nif==companies->company[i].nif){
-            return companies->company[i].state;
+int searchCompstate(COMPANIES companies, int nif) {
+    int i;
+    int state =0;
+    for (i = 0; i < companies.count; i++) {
+        if (companies.company[i].nif == nif) {
+            state= companies.company[i].state;
         }
     }
-    return -1;
+    return state;
 }
 
-int verifyNif(int nif,COMPANIES *companies){
-    int found =-1;
-    for (int i = 0; i < companies->count; i++) {
-        if(nif == companies->company[i].nif){
-            found= 1;
-            break;
-        }
-    }
-    return  found;
-}
-
-int insertComms(COMMENTS *comment,COMPANIES *companies){
+int insertCom(COMMENTS *comment,COMPANIES companies){
     int nif = getInt(NIF_MIN,NIF_MAX,NIF_MSG);
-
-    if(verifyCompState(nif,companies) != -1 && verifyNif(nif,companies) !=-1){
+    int state = searchCompstate(companies, nif);
+    if(state!= 0 ){
         comment->comment[comment->count].compNif =nif;
         getString(comment->comment[comment->count].userName,USER_NAME_MAX,NAME_MSG);
         getString(comment->comment[comment->count].userEmail,EMAIL_MAX,EMAIL_MSG);
@@ -277,8 +269,8 @@ int insertComms(COMMENTS *comment,COMPANIES *companies){
     return -1;
 }
 
-void insertComm(COMMENTS *comment,COMPANIES *companies){
-    if(insertComms(comment,companies) !=-1){
+void insertComm(COMMENTS *comment,COMPANIES companies){
+    if(insertCom(comment,companies) !=-1){
         comment->count++;
     } else{
         printf("ERRO ");
@@ -294,9 +286,9 @@ void printComm(COMMENTS *comment,COMPANIES *company){
 
 //rating
 
-void insertRating(COMPANIES*companies,RATINGS*ratings){
+void insertRating(COMPANIES companies,RATINGS *ratings){
     int nif = getInt(NIF_MIN,NIF_MAX,NIF_MSG);
-    if(verifyCompState(nif,companies) == 1 && verifyNif(nif,companies)==1) {
+    if(searchCompstate(companies, nif)!= -1) {
         ratings->rating->comNif = nif;
         ratings->rating->rating = getInt(RATE_MIN, RATE_MAX, RATE_MSG);
         ratings->count++;
