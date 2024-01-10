@@ -26,7 +26,7 @@
 #define USER_NAME_MAX  20
 #define EMAIL_MAX  30
 #define COMMENT_MAX  100
-
+#define COMMENT_LINE "/------------COMMENTS------------/"
 #define RATE_MSG "Rate 1 to 5: "
 #define NIF_MSG "Insert NIF: "
 #define  COMP_NAME "Insert company name: "
@@ -51,7 +51,7 @@ typedef struct {
 }ADDRESS;
 
 typedef struct {
-    unsigned int nif;
+    int nif;
     float rate;
     char name[CHAR_MAX];
     CATEGORY category;
@@ -92,8 +92,8 @@ typedef struct {
 void insertComp(COMPANIES *companies,BUSINESS *business);
 void updateComps(COMPANIES *companies,BUSINESS *business);
 void deleteComp(COMPANIES *companies);
-void searchComp(COMPANIES companies,BUSINESS *business);
-void listComp(COMPANIES companies,BUSINESS business);
+void searchComp(COMPANIES companies,BUSINESS *business,COMMENTS comments);
+void listComp(COMPANIES companies,BUSINESS business,COMMENTS comments);
 //comment
 
 void insertComm(COMMENTS *comment,COMPANIES companies);

@@ -9,6 +9,20 @@
 #include "input.h"
 #include "businessLines.h"
 
+
+
+
+
+int searchCompstate(COMPANIES companies, int nif) {
+    int i;
+    int state =0;
+    for (i = 0; i < companies.count; i++) {
+        if (companies.company[i].nif == nif) {
+            state= companies.company[i].state;
+        }
+    }
+    return state;
+}
 // used to show de state INACTIVE or ACTIVE instead of 0 or 1
 char *showState(int state){
     char*stateChar=(char*) malloc(sizeof(char)*10 );
@@ -50,28 +64,44 @@ char *showCatg(int catg){
     for (int i = 0;(*business)->count > i; ++i) {
         if(bl ==(*business)->business[i].id){
             strcpy(name, (*business)->business[i].name);
-
         }
     }
      return name;
 }
-void printComp(COMPANY company,BUSINESS *business) {
+
+void showCom(int nif,COMMENTS *pComments){
+
+
+    for (int i = 0;(pComments)->count > i; ++i) {
+        if(nif ==(pComments)->comment[i].compNif){
+         printf("%s \n",(pComments)->comment[i].comment) ;
+        }
+    }
+
+}
+
+
+
+
+void printComp(COMPANY company,BUSINESS *business,COMMENTS *comments) {
     char *busLine=showBLine(company.business_line,&business);
     char *catgName=showCatg(company.category);
     char *state= showState(company.state);
-    printf("%d   %s   %s   %s   %s %s %s   %s\n",company.nif,company.name, catgName,busLine ,company.address.street,company.address.cp,company.address.city,state);
 
+    printf("%d   %s   %s   %s   %s %s %s   %s\n",company.nif,company.name, catgName,busLine ,company.address.street,company.address.cp,company.address.city,state);
+    puts(COMMENT_LINE);
+    showCom(company.nif,comments);
     free(busLine);
     free(catgName);
     free(state);
 }
 
 
-void listComp(COMPANIES companies,BUSINESS business) {
+void listComp(COMPANIES companies,BUSINESS business,COMMENTS comments) {
     if (companies.count > 0) {
         int i;
         for (i = 0; i < companies.count; i++) {
-            printComp(companies.company[i],&business);
+            printComp(companies.company[i],&business,&comments);
         }
     } else {
         puts("ja foste");
@@ -88,12 +118,12 @@ int searchComps(COMPANIES companies, int nif) {
     return -1;
 }
 
-void searchComp(COMPANIES companies,BUSINESS *business) {
+void searchComp(COMPANIES companies,BUSINESS *business,COMMENTS comments) {
     int nif = getInt(NIF_MIN, NIF_MAX, NIF_MSG);
     int position = searchComps(companies,nif);
 
     if (position != -1) {
-        printComp(companies.company[position],business);
+        printComp(companies.company[position],business,&comments);
     } else {
         puts(ERROR);
     }
@@ -245,16 +275,7 @@ char *showCompName(int nif,COMPANIES **company){
 }
 
 
-int searchCompstate(COMPANIES companies, int nif) {
-    int i;
-    int state =0;
-    for (i = 0; i < companies.count; i++) {
-        if (companies.company[i].nif == nif) {
-            state= companies.company[i].state;
-        }
-    }
-    return state;
-}
+
 
 int insertCom(COMMENTS *comment,COMPANIES companies){
     int nif = getInt(NIF_MIN,NIF_MAX,NIF_MSG);
@@ -264,17 +285,18 @@ int insertCom(COMMENTS *comment,COMPANIES companies){
         getString(comment->comment[comment->count].userName,USER_NAME_MAX,NAME_MSG);
         getString(comment->comment[comment->count].userEmail,EMAIL_MAX,EMAIL_MSG);
         getString(comment->comment[comment->count].comment,COMMENT_MAX,COMMENT_MSG);
+        comment->count++;
         return 1;
     }
     return -1;
 }
 
 void insertComm(COMMENTS *comment,COMPANIES companies){
-    if(insertCom(comment,companies) !=-1){
-        comment->count++;
-    } else{
-        printf("ERRO ");
+    if(insertCom(comment,companies) ==-1){
+        puts(ERROR);
     }
+       // printf("ERRO ");
+
 }
 
 void printComm(COMMENTS *comment,COMPANIES *company){

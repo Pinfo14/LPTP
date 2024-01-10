@@ -81,7 +81,7 @@ void manageComp(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMEN
                 manageComp(company,companies,business,comments,ratings);
                 break;
             case 3:
-                listComp(companies,*business);
+                listComp(companies,*business,*comments);
                 manageComp(company,companies,business,comments,ratings);
                 break;
             case 4:
@@ -153,7 +153,7 @@ void userMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS
 
         switch (userOp) {
             case 1:
-                searchComp(companies,business);
+                searchComp(companies,business,*comments);
                 searchMenu(company,companies,business,comments,ratings);
                 break;
 
