@@ -8,18 +8,21 @@
 #include "company.h"
 #include "input.h"
 #include "businessLines.h"
+#include "search.h"
 
 
-int searchCompstate(COMPANIES companies, int nif) {
-    int i;
-    int state =0;
-    for (i = 0; i < companies.count; i++) {
-        if (companies.company[i].nif == nif) {
-            state= companies.company[i].state;
+char *showCompName(int nif,COMPANIES **company){
+
+    char *name=(char*)malloc(sizeof(char)*10);
+    for (int i = 0;(*company)->count > i; ++i) {
+        if(nif ==(*company)->company[i].nif){
+            strcpy(name, (*company)->company[i].name);
+
         }
     }
-    return state;
+    return name;
 }
+
 // used to show de state INACTIVE or ACTIVE instead of 0 or 1
 char *showState(int state){
     char*stateChar=(char*) malloc(sizeof(char)*10 );
@@ -103,27 +106,9 @@ void listComp(COMPANIES companies,BUSINESS business,COMMENTS comments) {
     }
 }
 
-int searchComps(COMPANIES companies, int nif) {
-    int i;
-    for (i = 0; i < companies.count; i++) {
-        if (companies.company[i].nif == nif) {
-            return i;
-        }
-    }
-    return -1;
-}
 
-void searchComp(COMPANIES companies,BUSINESS *business,COMMENTS comments) {
-    int nif = getInt(NIF_MIN, NIF_MAX, NIF_MSG);
-    int position = searchComps(companies,nif);
 
-    if (position != -1) {
-        printComp(companies.company[position],business,&comments);
-    } else {
-        puts(ERROR);
-    }
 
-}
 void insertCompBus(COMPANIES *companies, BUSINESS *busLine) {
     int bus_line;
     int found = 0;
@@ -211,19 +196,14 @@ void updateBLComp(COMPANY *company,BUSINESS *business){
         listBusLine(business);
         bus_line = getInt(ID_MIN, ID_MAX, BUSINESS_LINE);
 
-        // Assume bus_line is not found initially
-
-
         for (int i = 0; i < business->count; ++i) {
             if (bus_line == business->business[i].id) {
              company->business_line = bus_line;
                 found = 1;
-                // Exit the loop after finding a match
+
                 break;
             }
         }
-
-        // If bus_line is not found, you might want to handle that case
         if (!found) {
 
             printf("Invalid business line. Please try again.\n");
@@ -254,40 +234,6 @@ void updateComps(COMPANIES *companies,BUSINESS *business) {
 }
 //comments
 
-char *showCompName(int nif,COMPANIES **company){
-
-    char *name=(char*)malloc(sizeof(char)*10);
-    for (int i = 0;(*company)->count > i; ++i) {
-        if(nif ==(*company)->company[i].nif){
-            strcpy(name, (*company)->company[i].name);
-
-        }
-    }
-    return name;
-}
-
-
-
-
-int insertCom(COMMENTS *comment,COMPANIES companies){
-    int nif = getInt(NIF_MIN,NIF_MAX,NIF_MSG);
-    int state = searchCompstate(companies, nif);
-    if(state!= 0 ){
-        comment->comment[comment->count].compNif =nif;
-        getString(comment->comment[comment->count].userName,USER_NAME_MAX,NAME_MSG);
-        getString(comment->comment[comment->count].userEmail,EMAIL_MAX,EMAIL_MSG);
-        getString(comment->comment[comment->count].comment,COMMENT_MAX,COMMENT_MSG);
-        comment->count++;
-        return 1;
-    }
-    return -1;
-}
-
-void insertComm(COMMENTS *comment,COMPANIES companies){
-    if(insertCom(comment,companies) ==-1){
-        puts(ERROR);
-    }
-}
 
 void printComm(COMMENTS *comment,COMPANIES *company){
     int nif=comment->comment->compNif;
@@ -296,57 +242,3 @@ void printComm(COMMENTS *comment,COMPANIES *company){
     free(compName);
 }
 
-void updateMedRateForCompany(int comNif, RATINGS *ratings, COMPANIES *companies) {
-    float totalRating = 0;
-    int count = 0;
-
-
-    // Itera sobre todas as classificações para encontrar as classificações para a empresa específica
-    for (int i = 0; i < ratings->count; ++i) {
-        if(companies->company[i].rate !=0){
-            count =1;
-        }
-        if (comNif == ratings->rating[i].comNif) {
-            totalRating = companies->company[i].rate;
-            totalRating += ratings->rating[i].rating;
-            count++;
-        }
-    }
-
-    // Atualiza o campo rate da empresa se houver classificações e a média mudou
-    int position = searchComps(*companies, comNif);
-    if (position != -1 && count > 0) {
-        // Calcula a média das classificações
-        float medRate = totalRating / count;
-
-        // Atualiza o campo rate apenas se a média mudou
-        if (medRate != companies->company[position].rate) {
-            companies->company[position].rate = medRate;
-        }
-    }
-}
-
-int insertRatings(COMPANIES companies, RATINGS *ratings) {
-    int nif = getInt(NIF_MIN, NIF_MAX, NIF_MSG);
-    int position = searchComps(companies, nif);
-
-    if (position != -1) {
-        ratings->rating->comNif = nif;
-        ratings->rating->rating = getInt(RATE_MIN, RATE_MAX, RATE_MSG);
-        ratings->count++;
-
-        // Atualiza a média das classificações para a empresa específica
-        updateMedRateForCompany(nif, ratings, &companies);
-
-        return 1;
-    }
-
-    return -1;
-}
-
-void insertRating(COMPANIES companies,RATINGS *ratings){
-
-    if(insertRatings(companies,ratings)==-1){
-        printf(ERROR);
-    }
-}

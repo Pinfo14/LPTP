@@ -12,4 +12,8 @@ add_executable(LPTP main.c
         menu.c
         businessLines.h
         businessLines.c
+        search.h
+        search.c
+        user.c
+        user.h
 )

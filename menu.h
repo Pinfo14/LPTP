@@ -16,11 +16,13 @@
 #define TP_LP_MENU_H
 #include "company.h"
 #include "businessLines.h"
+#include "search.h"
+#include "user.h"
 
-void mainMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS *comments,RATINGS *ratings);
-void adminMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS *comments,RATINGS *ratings);
-void manageComp(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS *comments,RATINGS *ratings);
-void manageBusLine(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS *comments,RATINGS *ratings);
-void userMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS *comments,RATINGS *ratings);
-void searchMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS *comments,RATINGS *ratings);
+void mainMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings);
+void adminMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings);
+void manageComp(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings);
+void manageBusLine(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings);
+void userMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings);
+void searchMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings);
 #endif //TP_LP_MENU_H

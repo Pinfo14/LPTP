@@ -94,13 +94,8 @@ void updateComps(COMPANIES *companies,BUSINESS *business);
 void deleteComp(COMPANIES *companies);
 void searchComp(COMPANIES companies,BUSINESS *business,COMMENTS comments);
 void listComp(COMPANIES companies,BUSINESS business,COMMENTS comments);
-//comment
+void printComp(COMPANY company,BUSINESS *business,COMMENTS *comments);
 
-void insertComm(COMMENTS *comment,COMPANIES companies);
-void printComm(COMMENTS *comment,COMPANIES *company);
-
-//RATING
-void insertRating(COMPANIES companies,RATINGS *ratings);
 
 
 #endif //LPTP_COMPANY_H

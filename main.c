@@ -28,7 +28,7 @@ int main() {
     ratings->rating=(RATING *) malloc(sizeof(RATING )*3 );
     ratings->count=0;
 
-    mainMenu(companies,*companies,business,comments,ratings);
+    mainMenu(companies,business,comments,ratings);
 
 
     free(companies);

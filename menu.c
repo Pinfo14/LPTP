@@ -5,7 +5,7 @@
 #include "stdlib.h"
 #include "menu.h"
 
-void mainMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS *comments,RATINGS *ratings){
+void mainMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings){
     int op;
 
     do{
@@ -17,10 +17,10 @@ void mainMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS
         scanf("%d",&op);
         switch (op) {
             case 1:
-                userMenu( company,companies,business,comments,ratings);
+                userMenu( company,business,comments,ratings);
                 break;
             case 2:
-                adminMenu( company,companies,business,comments,ratings);
+                adminMenu( company,business,comments,ratings);
                 break;
             default:
 
@@ -30,7 +30,7 @@ void mainMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS
     } while (op !=0);
     exit(1);
 }
-void adminMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS *comments,RATINGS *ratings){
+void adminMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings){
     int op=0;
 
     do{
@@ -43,13 +43,13 @@ void adminMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENT
         scanf("%d",&op);
         switch (op ) {
             case 1:
-                manageComp(company,companies,business,comments,ratings);
+                manageComp(company,business,comments,ratings);
                 break;
             case 2:
-                manageBusLine(company,companies,business,comments,ratings);
+                manageBusLine(company,business,comments,ratings);
                 break;
             case 5:
-                mainMenu(company,companies,business,comments,ratings);
+                mainMenu(company,business,comments,ratings);
                 break;
             default:
 
@@ -58,7 +58,7 @@ void adminMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENT
     exit(1);
 }
 
-void manageComp(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS *comments,RATINGS *ratings){
+void manageComp(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings){
     int op=0;
 
     do{
@@ -73,23 +73,23 @@ void manageComp(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMEN
         scanf("%d",&op);
         switch (op) {
             case 1:
-                insertComp(&companies,business,ratings);
-                manageComp(company,companies,business,comments,ratings);
+                insertComp(company,business,ratings);
+                manageComp(company,business,comments,ratings);
                 break;
             case 2:
-                updateComps(&companies,business);
-                manageComp(company,companies,business,comments,ratings);
+                updateComps(company,business);
+                manageComp(company,business,comments,ratings);
                 break;
             case 3:
-                listComp(companies,*business,*comments);
-                manageComp(company,companies,business,comments,ratings);
+                listComp(*company,*business,*comments);
+                manageComp(company,business,comments,ratings);
                 break;
             case 4:
                 //deleteComp(&companies);
-                manageComp(company,companies,business,comments,ratings);
+                manageComp(company,business,comments,ratings);
                 break;
             case 5:
-                adminMenu(company,companies,business,comments,ratings);
+                adminMenu(company,business,comments,ratings);
 
                 break;
             default:
@@ -98,7 +98,7 @@ void manageComp(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMEN
     } while (op !=0);
     exit(1);
 }
-void manageBusLine(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS *comments,RATINGS *ratings){
+void manageBusLine(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings){
     int op=0;
 
     do{
@@ -114,22 +114,22 @@ void manageBusLine(COMPANIES *company,COMPANIES companies,BUSINESS *business,COM
         switch (op) {
             case 1:
                 insertBusLine(business);
-                manageBusLine(company,companies,business,comments,ratings);
+                manageBusLine(company,business,comments,ratings);
                 break;
             case 2:
                 updateBusLine(business);
-                manageBusLine(company,companies,business,comments,ratings);
+                manageBusLine(company,business,comments,ratings);
                 break;
             case 3:
                 listBusLine(business);
-                manageBusLine(company,companies,business,comments,ratings);
+                manageBusLine(company,business,comments,ratings);
                 break;
             case 4:
                 // deleteComp(&companies);
-                manageBusLine(company,companies,business,comments,ratings);
+                manageBusLine(company,business,comments,ratings);
                 break;
             case 5:
-                adminMenu(company,companies,business,comments,ratings);
+                adminMenu(company,business,comments,ratings);
 
                 break;
             default:
@@ -140,7 +140,7 @@ void manageBusLine(COMPANIES *company,COMPANIES companies,BUSINESS *business,COM
 
 }
 
-void userMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS *comments,RATINGS *ratings){
+void userMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings){
     int userOp;
     do {
 
@@ -153,12 +153,12 @@ void userMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS
 
         switch (userOp) {
             case 1:
-                searchComp(companies,business,*comments);
-                searchMenu(company,companies,business,comments,ratings);
+                searchComp(*company,business,*comments);
+                searchMenu(company,business,comments,ratings);
                 break;
 
             case 4:
-                mainMenu(company,companies,business,comments,ratings);
+                mainMenu(company,business,comments,ratings);
                 break;
             default:
                 printf("ERROORR!!\n");
@@ -167,7 +167,7 @@ void userMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS
     } while (userOp != 0);
     exit(1);
 }
-void searchMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMENTS *comments,RATINGS *ratings){
+void searchMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings){
     int userOp;
     do {
 
@@ -180,17 +180,17 @@ void searchMenu(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMEN
         scanf("%d", &userOp);
         switch (userOp) {
             case 1:
-                insertRating(companies,ratings);
-                searchMenu(company,companies,business,comments,ratings);
+                insertRating(*company,ratings);
+                searchMenu(company,business,comments,ratings);
                 break;
             case 2:
-                insertComm(comments,companies);
-                searchMenu(company,companies,business,comments,ratings);
+                insertComm(comments,*company);
+                searchMenu(company,business,comments,ratings);
 
                 break;
             case 3:
                // printComm(comments,company);
-                userMenu(company,companies,business,comments,ratings);
+                userMenu(company,business,comments,ratings);
                 break;
             default:
                 printf("ERROORR!!\n");
