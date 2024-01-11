@@ -73,7 +73,7 @@ void manageComp(COMPANIES *company,COMPANIES companies,BUSINESS *business,COMMEN
         scanf("%d",&op);
         switch (op) {
             case 1:
-                insertComp(&companies,business);
+                insertComp(&companies,business,ratings);
                 manageComp(company,companies,business,comments,ratings);
                 break;
             case 2:
