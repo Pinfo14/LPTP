@@ -10,8 +10,13 @@
 #include "stdlib.h"
 #include "search.h"
 #include "businessLines.h"
+#include "string.h"
+#include "general.h"
 
 
 int searchCompstate(COMPANIES companies, int nif);
 int searchComps(COMPANIES companies, int nif);
+void searchCompByName( COMPANIES *companies, BUSINESS *business);
+void searchComByBl( COMPANIES *companies,BUSINESS *business);
+void searchCompByCP( COMPANIES *companies,BUSINESS *business);
 #endif //LPTP_SEARCH_H

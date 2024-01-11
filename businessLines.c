@@ -3,7 +3,6 @@
 #include "businessLines.h"
 #include "stdlib.h"
 #include "stdio.h"
-#include "string.h"
 #include "input.h"
 #include "company.h"
 

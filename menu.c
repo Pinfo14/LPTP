@@ -153,7 +153,6 @@ void userMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *
 
         switch (userOp) {
             case 1:
-                searchComp(*company,business,*comments);
                 searchMenu(company,business,comments,ratings);
                 break;
 
@@ -167,7 +166,8 @@ void userMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *
     } while (userOp != 0);
     exit(1);
 }
-void searchMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings){
+
+void rateComMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings){
     int userOp;
     do {
 
@@ -181,15 +181,50 @@ void searchMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS
         switch (userOp) {
             case 1:
                 insertRating(*company,ratings);
-                searchMenu(company,business,comments,ratings);
+                rateComMenu(company,business,comments,ratings);
                 break;
             case 2:
                 insertComm(comments,*company);
-                searchMenu(company,business,comments,ratings);
+                rateComMenu(company,business,comments,ratings);
 
                 break;
             case 3:
-               // printComm(comments,company);
+
+                searchMenu(company,business,comments,ratings);
+                break;
+            default:
+                printf("ERROORR!!\n");
+        }
+    } while (userOp != 0);
+    exit(1);
+}
+void searchMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings){
+    int userOp;
+    do {
+
+        printf("\nSEARCH MENU\n");
+        printf("1. Name\n");
+        printf("2. Business Line\n");
+        printf("3. Postal Code\n");
+        printf("4. Go Back\n");
+        printf("0. Exit\n");
+        printf("CHOOSE OPTION: ");
+        scanf("%d", &userOp);
+        switch (userOp) {
+            case 1:
+                searchCompByName(company,business);
+                rateComMenu(company,business,comments,ratings);
+                break;
+            case 2:
+                searchComByBl(company,business);
+                rateComMenu(company,business,comments,ratings);
+
+                break;
+            case 3:
+                searchCompByCP(company,business);
+                rateComMenu(company,business,comments,ratings);
+                break;
+            case 4:
                 userMenu(company,business,comments,ratings);
                 break;
             default:

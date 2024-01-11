@@ -16,4 +16,6 @@ add_executable(LPTP main.c
         search.c
         user.c
         user.h
+        general.c
+        general.h
 )

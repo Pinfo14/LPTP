@@ -91,6 +91,12 @@ build CMakeFiles/LPTP.dir/user.c.o: C_COMPILER__LPTP_unscanned_Debug /home/emanu
   OBJECT_DIR = CMakeFiles/LPTP.dir
   OBJECT_FILE_DIR = CMakeFiles/LPTP.dir
 
+build CMakeFiles/LPTP.dir/general.c.o: C_COMPILER__LPTP_unscanned_Debug /home/emanuel/Desktop/1ºSemestre/LPTP/general.c || cmake_object_order_depends_target_LPTP
+  DEP_FILE = CMakeFiles/LPTP.dir/general.c.o.d
+  FLAGS = -g -std=gnu11 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/LPTP.dir
+  OBJECT_FILE_DIR = CMakeFiles/LPTP.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target LPTP
@@ -99,7 +105,7 @@ build CMakeFiles/LPTP.dir/user.c.o: C_COMPILER__LPTP_unscanned_Debug /home/emanu
 #############################################
 # Link the executable LPTP
 
-build LPTP: C_EXECUTABLE_LINKER__LPTP_Debug CMakeFiles/LPTP.dir/main.c.o CMakeFiles/LPTP.dir/company.c.o CMakeFiles/LPTP.dir/input.c.o CMakeFiles/LPTP.dir/menu.c.o CMakeFiles/LPTP.dir/businessLines.c.o CMakeFiles/LPTP.dir/search.c.o CMakeFiles/LPTP.dir/user.c.o
+build LPTP: C_EXECUTABLE_LINKER__LPTP_Debug CMakeFiles/LPTP.dir/main.c.o CMakeFiles/LPTP.dir/company.c.o CMakeFiles/LPTP.dir/input.c.o CMakeFiles/LPTP.dir/menu.c.o CMakeFiles/LPTP.dir/businessLines.c.o CMakeFiles/LPTP.dir/search.c.o CMakeFiles/LPTP.dir/user.c.o CMakeFiles/LPTP.dir/general.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/LPTP.dir
   POST_BUILD = :

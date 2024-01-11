@@ -3,6 +3,7 @@
 #include "company.h"
 #include "menu.h"
 #include "businessLines.h"
+#include "general.h"
 
 int main() {
     COMPANIES  *companies;
