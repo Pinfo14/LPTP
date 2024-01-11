@@ -8,25 +8,7 @@
 #include "company.h"
 #include "input.h"
 #include "businessLines.h"
-/*
-float medRate(int comNif, RATINGS *ratings) {
-    if (ratings->count == 0) {
-        return -1; // Retorna -1 para indicar que não há classificações disponíveis
-    }
-    float totalRating = 0;
-    int count = 0;
 
-    // Itera sobre todas as classificações para encontrar as classificações para a empresa específica
-    for (int i = 0; i < ratings->count; ++i) {
-        if (comNif == ratings->rating[i].comNif) {
-            totalRating += ratings->rating[i].rating;
-            count++;
-        }
-    }
-    // Calcula e retorna a média das classificações
-    return totalRating / count;
-
-}*/
 
 int searchCompstate(COMPANIES companies, int nif) {
     int i;
@@ -314,21 +296,6 @@ void printComm(COMMENTS *comment,COMPANIES *company){
     free(compName);
 }
 
-//rating
-/*
-int insertRatings(COMPANIES companies,RATINGS *ratings){
-    int nif = getInt(NIF_MIN,NIF_MAX,NIF_MSG);
-    int position= searchComps(companies,nif);
-
-    if(position!= -1) {
-        ratings->rating->comNif = nif;
-        ratings->rating->rating = getInt(RATE_MIN, RATE_MAX, RATE_MSG);
-        ratings->count++;
-         return 1;
-    }
-    return -1;
-}
-*/
 void updateMedRateForCompany(int comNif, RATINGS *ratings, COMPANIES *companies) {
     float totalRating = 0;
     int count = 0;
