@@ -20,6 +20,8 @@ void mainMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *
                 userMenu( company,business,comments,ratings);
                 break;
             case 2:
+
+
                 adminMenu( company,business,comments,ratings);
                 break;
             default:
@@ -28,6 +30,7 @@ void mainMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *
 
         }
     } while (op !=0);
+
     exit(1);
 }
 void adminMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings){
@@ -121,7 +124,7 @@ void manageComp(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS
                 manageComp(company,business,comments,ratings);
                 break;
             case 4:
-                //deleteComp(&companies);
+                deleteComp(company,comments);
                 manageComp(company,business,comments,ratings);
                 break;
             case 5:
@@ -201,6 +204,7 @@ void userMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *
 
     } while (userOp != 0);
     exit(1);
+
 }
 
 void rateComMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings){

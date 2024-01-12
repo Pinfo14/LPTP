@@ -93,7 +93,7 @@ typedef struct {
 //COMPANIES
 void insertComp(COMPANIES *companies,BUSINESS *business,RATINGS *ratings);
 void updateComps(COMPANIES *companies,BUSINESS *business);
-void deleteComp(COMPANIES *companies);
+void deleteComp(COMPANIES *companies, COMMENTS *comments);
 void searchComp(COMPANIES companies,BUSINESS *business,COMMENTS comments);
 void listComp(COMPANIES companies,BUSINESS business,COMMENTS comments);
 void printComp(COMPANY company,BUSINESS *business,COMMENTS *comments);

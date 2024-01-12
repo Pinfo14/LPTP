@@ -31,9 +31,9 @@ int main() {
     ratings->count=0;
 
 
-    importCompanies(companies);
+
     mainMenu(companies,business,comments,ratings);
-    exportCompanies(companies);
+
 
 
 

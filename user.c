@@ -56,7 +56,7 @@ int insertRatings(COMPANIES companies, RATINGS *ratings) {
     int nif = getInt(NIF_MIN, NIF_MAX, NIF_MSG);
     int position = searchComps(companies, nif);
 
-    if (position != -1) {
+    if (position != -1 ) {
         ratings->rating->comNif = nif;
         ratings->rating->rating = getInt(RATE_MIN, RATE_MAX, RATE_MSG);
         ratings->count++;

@@ -46,7 +46,7 @@ void searchCompByName( COMPANIES *companies,BUSINESS *business) {
     scanf("%s",name);
 
     for (int i = 0; i < companies->count; i++) {
-        if (strstr(companies->company[i].name, name)) {
+        if (strstr(companies->company[i].name, name)&& companies->company[i].state!=0) {
 
             printf("\nCompany found:\n");
             printf("NIF: %d\n",companies->company[i].nif);
@@ -67,7 +67,7 @@ void searchComByBl( COMPANIES *companies,BUSINESS *business) {
     scanf("%s",name);
 
     for (int i = 0; i < companies->count; i++) {
-        if (strstr(business->business[i].name, name) ) {
+        if (strstr(business->business[i].name, name)&& companies->company[i].state!=0 ) {
 
             printf("\nCompany found:\n");
             printf("NIF: %d\n",companies->company[i].nif);
@@ -88,7 +88,7 @@ void searchCompByCP( COMPANIES *companies,BUSINESS *business) {
     scanf("%s",name);
 
     for (int i = 0; i < companies->count; i++) {
-        if (strstr(companies->company[i].address.cp, name)) {
+        if (strstr(companies->company[i].address.cp, name) && companies->company[i].state!=0) {
 
             printf("\nCompany found:\n");
             printf("NIF: %d\n",companies->company[i].nif);

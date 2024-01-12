@@ -108,30 +108,31 @@ void insertComp(COMPANIES *companies,BUSINESS *business,RATINGS *ratings) {
     }
 }
 
-void deleteCompData(COMPANY *company) {
-    company->nif=0;
-    strcpy(company->name,"");
-    strcpy(company->address.city,"");
-    strcpy(company->address.street,"");
-    strcpy(company->address.cp,"");
-    company->business_line=0;
-    company->category=0;
-    company->state=-1;
-}
-
-void deleteComp(COMPANIES *companies){
-
-    int i;
-    int nif = searchComps(*companies, getInt(NIF_MIN,NIF_MAX,NIF_MSG));
-    if(nif != -1){
-        for (i=nif ; i <companies->count-1 ; i++) {
-            companies->company[i]=companies->company[i+1];
+void deleteComp(COMPANIES *companies, COMMENTS *comments) {
+    int index = -1;
+    int nif = getInt(NIF_MIN,NIF_MAX,NIF_MSG);
+    for (int i = 0; i < companies->count; i++) {
+        if (companies->company[i].nif == nif) {
+            index = i;
+            break;
         }
-        deleteCompData(&companies->company[i]);
-        companies->count--;
-    }else{
-        printf("COMPANY DON'T EXIST");
     }
+    if (index == -1) {
+        printf("Company not found.\n");
+        return;
+    }
+
+    for (int i = 0; i < comments->count; i++) {
+        if (comments->comment[i].compNif == nif) {
+            companies->company[index].state = INACTIVE;
+            printf("Company with NIF %d have comments. The company state changed to INACTIVE.\n", nif);
+            return;
+        }
+    }
+    companies->company[index] = companies->company[companies->count - 1];
+    companies->count--;
+
+    printf("Company with NIF %d was deleted.\n", nif);
 }
 void updateBLComp(COMPANY *company,BUSINESS *business){
     int bus_line;
