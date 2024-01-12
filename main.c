@@ -31,9 +31,9 @@ int main() {
     ratings->count=0;
 
 
-
+    initializeProgram(companies,business,comments);
     mainMenu(companies,business,comments,ratings);
-
+    exportData(companies,business,comments);
 
 
 
