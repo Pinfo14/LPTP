@@ -204,10 +204,30 @@ void print_best_comp(COMPANIES *companies){
     for (int i = 0; i <3; i++) {
         printf("company %d: %s - Rate: %.2f\n", i + 1, companies->company[i].name, companies->company[i].rate);
     }
+}void lastComments(COMPANIES company, COMMENTS comments, int numComments) {
+    printf("Last %d Comments :\n", numComments);
+
+    int begin = comments.count - numComments;
+    begin = (begin < 0) ? 0 : begin;
+
+    for (int i = begin; i < comments.count; i++) {
+        if (comments.comment[i].compNif == company.company[i].nif) {
+            printf("User: %s\n", comments.comment[i].userName);
+            printf("Email: %s\n", comments.comment[i].userEmail);
+            printf("Comment: %s\n", comments.comment[i].comment);
+            printf("----------------------\n");
+        }
+    }
 }
+void lastComment(COMPANIES companies,COMMENTS comments){
 
+    int num=0;
+    printf("Insert the number os comments: ");
+    scanf("%d",&num);
 
-        void exportCompanies(COMPANIES *companies) {
+    lastComments(companies,comments,num);
+}
+void exportCompanies(COMPANIES *companies) {
     FILE *fp;
     int i;
 
@@ -229,7 +249,6 @@ void print_best_comp(COMPANIES *companies){
                     companies->company[i].address.cp,
                     companies->company[i].state,
                     companies->company[i].rate);
-
         }
 
         fclose(fp);

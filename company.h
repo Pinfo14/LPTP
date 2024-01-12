@@ -98,6 +98,7 @@ void searchComp(COMPANIES companies,BUSINESS *business,COMMENTS comments);
 void listComp(COMPANIES companies,BUSINESS business,COMMENTS comments);
 void printComp(COMPANY company,BUSINESS *business,COMMENTS *comments);
 void print_best_comp(COMPANIES *companies);
+void lastComment(COMPANIES companies,COMMENTS comments);
 void importCompanies(COMPANIES *companies);
 void exportCompanies(COMPANIES *companies);
 

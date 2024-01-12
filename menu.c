@@ -75,8 +75,8 @@ void reportMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS
         scanf("%d", &op);
         switch (op) {
             case 1:
-                insertComp(company, business, ratings);
-                manageComp(company, business, comments, ratings);
+                lastComment( *company, *comments);
+                reportMenu(company, business, comments, ratings);
                 break;
             case 2:
                 print_best_comp(company);
