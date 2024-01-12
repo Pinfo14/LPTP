@@ -57,8 +57,8 @@ int insertRatings(COMPANIES companies, RATINGS *ratings) {
     int position = searchComps(companies, nif);
 
     if (position != -1 ) {
-        ratings->rating->comNif = nif;
-        ratings->rating->rating = getInt(RATE_MIN, RATE_MAX, RATE_MSG);
+        ratings->rating[ratings->count].comNif = nif;
+        ratings->rating[ratings->count].rating = getInt(RATE_MIN, RATE_MAX, RATE_MSG);
         ratings->count++;
 
         updateMedRateForCompany(nif, ratings, &companies);
