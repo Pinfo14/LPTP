@@ -12,8 +12,12 @@
 #include "search.h"
 #include "string.h"
 
+
+
 char *showCompName(int nif,COMPANIES **company);
 char *showState(int state);
 char *showCatg(int catg);
 char *showBLine(int bl,BUSINESS **business);
+int isFileEmpty(const char *filename);
+
 #endif //LPTP_GENERAL_H

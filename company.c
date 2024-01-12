@@ -3,6 +3,7 @@
 // Created by Emanuel Pinto on 16/12/2023.
 //
 #include <stdio.h>
+#include <float.h>
 #include "stdlib.h"
 #include "string.h"
 #include "company.h"
@@ -38,13 +39,14 @@ void printComp(COMPANY company,BUSINESS *business,COMMENTS *comments) {
 
 
 void listComp(COMPANIES companies,BUSINESS business,COMMENTS comments) {
-    if (companies.count > 0) {
+    int file=isFileEmpty(FILENAME);
+    if (companies.count > 0 || file!=-1) {
         int i;
         for (i = 0; i < companies.count; i++) {
             printComp(companies.company[i],&business,&comments);
         }
     } else {
-        puts("ja foste");
+        puts("NO companies");
     }
 }
 
@@ -184,3 +186,82 @@ void printComm(COMMENTS *comment,COMPANIES *company){
     free(compName);
 }
 
+void comp_rate(COMPANIES *companies) {
+    for (int i = 0; i < companies->count - 1; i++) {
+        for (int j = 0; j < companies->count - i - 1; j++) {
+            if (companies->company[j].rate < companies->company[j + 1].rate) {
+                // Troca os elementos se estiverem fora de ordem
+                COMPANY temp = companies->company[j];
+                companies->company[j] = companies->company[j + 1];
+                companies->company[j + 1] = temp;
+            }
+        }
+    }
+}
+void print_best_comp(COMPANIES *companies){
+
+    printf("\nTop3 Best Companies:\n");
+    for (int i = 0; i <3; i++) {
+        printf("company %d: %s - Rate: %.2f\n", i + 1, companies->company[i].name, companies->company[i].rate);
+    }
+}
+
+
+        void exportCompanies(COMPANIES *companies) {
+    FILE *fp;
+    int i;
+
+    fp = fopen(FILENAME, "w");
+    if (fp == NULL) {
+        printf(ERROR);
+
+    } else {
+        fprintf(fp, "%d\n", companies->count);
+        for (i = 0; i < companies->count; i++) {
+
+            fprintf(fp, "%d,%s,%d,%d,%s,%s,%s,%d,%f\n",
+                    companies->company[i].nif,
+                    companies->company[i].name,
+                    companies->company[i].category,
+                    companies->company[i].business_line,
+                    companies->company[i].address.city,
+                    companies->company[i].address.street,
+                    companies->company[i].address.cp,
+                    companies->company[i].state,
+                    companies->company[i].rate);
+
+        }
+
+        fclose(fp);
+        printf("NIIICE");
+
+    }
+}
+
+void importCompanies(COMPANIES *companies) {
+    FILE *fp;
+
+    fp = fopen(FILENAME, "r+");
+    if (fp == NULL) {
+        printf(ERROR);
+    } else {
+        fscanf(fp, "%d", &companies->count);
+
+        // Allocate memory for the company array
+        companies->company = (COMPANY *)realloc(companies->company, sizeof(COMPANY) * (companies->count+1));
+
+        for (int i = 0; i < companies->count; ++i) {
+            fscanf(fp, "%d,%s,%d,%d,%s,%s,%s,%d,%f\n",
+                   &companies->company[i].nif,
+                   companies->company[i].name,
+                   &companies->company[i].category,
+                   &companies->company[i].business_line,
+                   companies->company[i].address.city,
+                   companies->company[i].address.street,
+                   companies->company[i].address.cp,
+                   &companies->company[i].state,
+                   &companies->company[i].rate);
+        }
+        fclose(fp);
+    }
+}

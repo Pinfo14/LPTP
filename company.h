@@ -15,6 +15,7 @@
 #ifndef TP_LP_COMPANY_H
 #define TP_LP_COMPANY_H
 #include "businessLines.h"
+#define INITIAL_SIZE 10
 #define CHAR_MAX 100
 #define NIF_MIN 1
 #define NIF_MAX 999999
@@ -26,6 +27,7 @@
 #define USER_NAME_MAX  20
 #define EMAIL_MAX  30
 #define COMMENT_MAX  100
+#define FILENAME "/home/emanuel/Desktop/1ºSemestre/LPTP/data.txt"
 #define COMMENT_LINE "/------------COMMENTS------------/"
 #define RATE_MSG "Rate 1 to 5: "
 #define NIF_MSG "Insert NIF: "
@@ -95,7 +97,9 @@ void deleteComp(COMPANIES *companies);
 void searchComp(COMPANIES companies,BUSINESS *business,COMMENTS comments);
 void listComp(COMPANIES companies,BUSINESS business,COMMENTS comments);
 void printComp(COMPANY company,BUSINESS *business,COMMENTS *comments);
-
+void print_best_comp(COMPANIES *companies);
+void importCompanies(COMPANIES *companies);
+void exportCompanies(COMPANIES *companies);
 
 
 #endif //LPTP_COMPANY_H

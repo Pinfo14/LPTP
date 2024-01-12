@@ -37,6 +37,7 @@ void adminMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS 
         printf("\nADMIN MENU\n");
         printf("1. Manage companies\n");
         printf("2. Manage business lines\n");
+        printf("3. Reports\n");
         printf("5. Go back\n");
         printf("0. EXIT\n  ");
         printf("CHOOSE OPTION: ");
@@ -48,6 +49,9 @@ void adminMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS 
             case 2:
                 manageBusLine(company,business,comments,ratings);
                 break;
+            case 3:
+                reportMenu(company,business,comments,ratings);
+                break;
             case 5:
                 mainMenu(company,business,comments,ratings);
                 break;
@@ -55,6 +59,38 @@ void adminMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS 
 
         }
     } while (op !=0);
+    exit(1);
+}
+
+void reportMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings) {
+    int op = 0;
+
+    do {
+        printf("\nMANAGE COMPANY\n");
+        printf("1. Last Comments\n");
+        printf("2. Best companies\n");
+        printf("3. Go back\n");
+        printf("0. EXIT  ");
+        printf("CHOOSE OPTION: ");
+        scanf("%d", &op);
+        switch (op) {
+            case 1:
+                insertComp(company, business, ratings);
+                manageComp(company, business, comments, ratings);
+                break;
+            case 2:
+                print_best_comp(company);
+                reportMenu(company, business, comments, ratings);
+                break;
+            case 3:
+
+               adminMenu(company, business, comments, ratings);
+                break;
+
+            default:
+
+        }
+    } while (op != 0);
     exit(1);
 }
 

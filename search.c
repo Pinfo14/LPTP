@@ -99,3 +99,7 @@ void searchCompByCP( COMPANIES *companies,BUSINESS *business) {
         }
     }
 }
+
+
+//Reports
+

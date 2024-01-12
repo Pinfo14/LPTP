@@ -25,4 +25,5 @@ void manageComp(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS
 void manageBusLine(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings);
 void userMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings);
 void searchMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings);
+void reportMenu(COMPANIES *company,BUSINESS *business,COMMENTS *comments,RATINGS *ratings);
 #endif //TP_LP_MENU_H

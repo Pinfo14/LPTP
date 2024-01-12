@@ -7,29 +7,34 @@
 
 int main() {
     COMPANIES  *companies;
-    companies=(COMPANIES*)malloc(sizeof(COMPANIES)*3 );
-    companies->company =(COMPANY*)malloc(sizeof(COMPANY)*3 );
+    companies=(COMPANIES*)malloc(sizeof(COMPANIES)*INITIAL_SIZE );
+    companies->company =(COMPANY*)malloc(sizeof(COMPANY)*INITIAL_SIZE );
     companies->count=0;
 
+
     BUSINESS *business;
-    business=(BUSINESS*) malloc(sizeof(BUSINESS)*3 );
-    business->business=(BUS_LINE*) malloc(sizeof(BUS_LINE)*3 );
+    business=(BUSINESS*) malloc(sizeof(BUSINESS)*INITIAL_SIZE );
+    business->business=(BUS_LINE*) malloc(sizeof(BUS_LINE)*INITIAL_SIZE );
     business->count=0;
 
 
     COMMENTS *comments;
-    comments =(COMMENTS*) malloc(sizeof(COMMENTS)*3 );
-    comments->comment=(COMMENT *) malloc(sizeof(COMMENT)*3 );
+    comments =(COMMENTS*) malloc(sizeof(COMMENTS)*INITIAL_SIZE );
+    comments->comment=(COMMENT *) malloc(sizeof(COMMENT)*INITIAL_SIZE );
     comments->count=0;
 
 
 
     RATINGS *ratings;
-    ratings =(RATINGS *) malloc(sizeof(RATINGS)*3 );
-    ratings->rating=(RATING *) malloc(sizeof(RATING )*3 );
+    ratings =(RATINGS *) malloc(sizeof(RATINGS)*INITIAL_SIZE );
+    ratings->rating=(RATING *) malloc(sizeof(RATING )*INITIAL_SIZE );
     ratings->count=0;
 
+
+    importCompanies(companies);
     mainMenu(companies,business,comments,ratings);
+    exportCompanies(companies);
+
 
 
     free(companies);

@@ -16,7 +16,7 @@
 
 int searchCompstate(COMPANIES companies, int nif);
 int searchComps(COMPANIES companies, int nif);
-void searchCompByName( COMPANIES *companies, BUSINESS *business);
+void  searchCompByName( COMPANIES *companies, BUSINESS *business);
 void searchComByBl( COMPANIES *companies,BUSINESS *business);
 void searchCompByCP( COMPANIES *companies,BUSINESS *business);
 #endif //LPTP_SEARCH_H

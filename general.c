@@ -63,4 +63,23 @@ char *showBLine(int bl,BUSINESS **business){
     }
     return name;
 }
+int isFileEmpty(const char *filename) {
+    FILE *file = fopen(filename, "r");  // Open the file in read mode
+
+    if (file == NULL) {
+        perror("Error opening file");
+        return -1;  // Error opening the file
+    }
+
+    fseek(file, 0, SEEK_END);  // Move the file pointer to the end of the file
+    long size = ftell(file);   // Get the current position, which is the file size
+
+    fclose(file);  // Close the file
+
+    if (size == 0) {
+        return -1;  // File is empty
+    } else {
+        return 1;  // File is not empty
+    }
+}
 
