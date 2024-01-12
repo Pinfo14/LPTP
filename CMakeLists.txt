@@ -18,5 +18,4 @@ add_executable(LPTP main.c
         user.h
         general.c
         general.h
-        data.txt
 )

@@ -9,7 +9,7 @@
 * @brief A header file providing utility functions for company management.
 *
 * This  file contains a collection of functions designed to manage the company
-* in a C or C++ program. It includes functions for create, delete,update and read companies
+* It includes functions for create, delete,update and read companies
 */
 
 #ifndef TP_LP_COMPANY_H

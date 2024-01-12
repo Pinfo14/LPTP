@@ -1,7 +1,12 @@
-
-//
-// Created by Emanuel Pinto on 16/12/2023.
-//
+/**
+ *
+ * @file company.c
+ * @author Emanuel Pinto
+ * @date 16-12-2023
+ * @version 1
+ *
+ * Source file containing all the functions about companies.
+ */
 #include <stdio.h>
 #include <float.h>
 #include "stdlib.h"
@@ -11,7 +16,15 @@
 #include "businessLines.h"
 #include "search.h"
 
-
+/**
+ * Displays comments related to a specific company based on its NIF.
+ *
+ * This function prints the user name, email, and comment for each comment associated
+ * with the specific company NIF.
+ *
+ * @param nif The NIF of the company.
+ * @param comments Pointer to the COMMENTS structure .
+ */
 void showCom(int nif,COMMENTS *comments){
 
     for (int i = 0;comments->count > i; ++i) {
@@ -20,10 +33,18 @@ void showCom(int nif,COMMENTS *comments){
         }
     }
 }
-
-
-
-
+/**
+ * Prints information about a company, including its business line, category,
+ * address, state, and average rate.
+ *
+ * This function retrieves and displays information about a company, including business
+ * line and category names instead of IDs. It also prints comments related to the
+ * company.
+ *
+ * @param company The COMPANY structure representing the company.
+ * @param business Pointer to the BUSINESS structure .
+ * @param comments Pointer to the COMMENTS structure .
+ */
 void printComp(COMPANY company,BUSINESS *business,COMMENTS *comments) {
     char *busLine=showBLine(company.business_line,&business);
     char *catgName=showCatg(company.category);
@@ -36,7 +57,15 @@ void printComp(COMPANY company,BUSINESS *business,COMMENTS *comments) {
     free(catgName);
     free(state);
 }
-
+/**
+ * Lists all companies along with detailed information and associated comments.
+ *
+ * This function lists all companies, including detailed information and comments.
+ *
+ * @param companies The COMPANIES structure .
+ * @param business Pointer to the BUSINESS structure.
+ * @param comments Pointer to the COMMENTS structure.
+ */
 
 void listComp(COMPANIES companies,BUSINESS business,COMMENTS comments) {
     int file=isFileEmpty(FILENAME_COMP);
@@ -50,7 +79,15 @@ void listComp(COMPANIES companies,BUSINESS business,COMMENTS comments) {
     }
 }
 
-
+/**
+ * Inserts a business line ID into a company's business_line field .
+ *
+ * This function prompts the user to select a business line ID and inserts it into the
+ * specified company's business_line.
+ *
+ * @param companies Pointer to the COMPANIES structure.
+ * @param busLine Pointer to the BUSINESS structure .
+ */
 
 
 void insertCompBus(COMPANIES *companies, BUSINESS *busLine) {
@@ -77,8 +114,17 @@ void insertCompBus(COMPANIES *companies, BUSINESS *busLine) {
         insertCompBus(companies,busLine);
     }
 }
-
-//INSERT COMP
+/**
+ * Inserts a new company into the COMPANIES structure after verifying the NIF.
+ *
+ * This function ask the user for company information and inserts a new company into
+ * the COMPANIES structure after verifying the NIF.
+ *
+ * @param companies Pointer to the COMPANIES structure.
+ * @param business Pointer to the BUSINESS structure.
+ * @param ratings Pointer to the RATINGS structure.
+ * @return The index where the new company is inserted, or -1 if insertion fails.
+ */
 int insertComps(COMPANIES *companies,BUSINESS *business,RATINGS *ratings) {
     int nif;
     nif= getInt(NIF_MIN,NIF_MAX,NIF_MSG);
@@ -97,7 +143,16 @@ int insertComps(COMPANIES *companies,BUSINESS *business,RATINGS *ratings) {
     return -1;
 }
 
-
+/**
+ * Initiates the insertion of a new company.
+ *
+ * This function initiates the process of inserting a new company by verifying the count
+ * and calling the insertComps function.
+ *
+ * @param companies Pointer to the COMPANIES structure.
+ * @param business Pointer to the BUSINESS structure.
+ * @param ratings Pointer to the RATINGS structure.
+ */
 void insertComp(COMPANIES *companies,BUSINESS *business,RATINGS *ratings) {
     if (companies->count < 10) {
         if (insertComps(companies,business,ratings) == -1) {
@@ -107,7 +162,15 @@ void insertComp(COMPANIES *companies,BUSINESS *business,RATINGS *ratings) {
         puts(ERROR);
     }
 }
-
+/**
+ * Deletes a company from the COMPANIES structure based on its NIF.
+ *
+ * This function ask the user for a company NIF, searches for the company, and
+ * deletes it. If the company has  comments, its state is changed to INACTIVE.
+ *
+ * @param companies Pointer to the COMPANIES structure.
+ * @param comments Pointer to the COMMENTS structure.
+ */
 void deleteComp(COMPANIES *companies, COMMENTS *comments) {
     int index = -1;
     int nif = getInt(NIF_MIN,NIF_MAX,NIF_MSG);
@@ -134,6 +197,15 @@ void deleteComp(COMPANIES *companies, COMMENTS *comments) {
 
     printf("Company with NIF %d was deleted.\n", nif);
 }
+/**
+ * Updates a company's business line based on user input.
+ *
+ * This function updates a company's business line by asking the user for a new
+ * business line ID.
+ *
+ * @param company Pointer to the COMPANY .
+ * @param business Pointer to the BUSINESS.
+ */
 void updateBLComp(COMPANY *company,BUSINESS *business){
     int bus_line;
     int found=0;
@@ -156,6 +228,15 @@ void updateBLComp(COMPANY *company,BUSINESS *business){
 
     } while (found!=1);
 }
+/**
+ * Updates a company's information based on user input.
+ *
+ * This function updates a company's information, including name, category, business
+ * line, address, and state, based on user input.
+ *
+ * @param company Pointer to the COMPANY .
+ * @param business Pointer to the BUSINESS.
+ */
 void updateComp(COMPANY *company,BUSINESS *business) {
     float rating = company->rate;
     company->rate =rating;
@@ -167,7 +248,15 @@ void updateComp(COMPANY *company,BUSINESS *business) {
     getString(company->address.cp,CP_MAX,COMP_CP);
     company->state= getInt(0,1,COMP_STATE);
 }
-
+/**
+ * Initiates the update of a company's information.
+ *
+ * This function initiates the process of updating a company's information by searching
+ * for the company based on its NIF and calling the updateComp function.
+ *
+ * @param companies Pointer to the COMPANIES.
+ * @param business Pointer to the BUSINESS.
+ */
 void updateComps(COMPANIES *companies,BUSINESS *business) {
     int position = searchComps(*companies, getInt(NIF_MIN ,NIF_MAX, NIF_MSG));
 
@@ -179,33 +268,50 @@ void updateComps(COMPANIES *companies,BUSINESS *business) {
 }
 //comments
 
-
+/*
 void printComm(COMMENTS *comment,COMPANIES *company){
     int nif=comment->comment->compNif;
     char *compName = showCompName(nif,&company);
     printf("%s  %s  %s  %s", compName,comment->comment->userName,comment->comment->userEmail,comment->comment->comment);
     free(compName);
-}
-
+}*/
+/*
 void comp_rate(COMPANIES *companies) {
     for (int i = 0; i < companies->count - 1; i++) {
         for (int j = 0; j < companies->count - i - 1; j++) {
             if (companies->company[j].rate < companies->company[j + 1].rate) {
-                // Troca os elementos se estiverem fora de ordem
                 COMPANY temp = companies->company[j];
                 companies->company[j] = companies->company[j + 1];
                 companies->company[j + 1] = temp;
             }
         }
     }
-}
+}*/
+
+/**
+ * Prints the top three best-rated companies.
+ *
+ * This function prints the names and rates of the top three best-rated companies.
+ *
+ * @param companies Pointer to the COMPANIES.
+ */
 void print_best_comp(COMPANIES *companies){
 
     printf("\nTop3 Best Companies:\n");
     for (int i = 0; i <3; i++) {
         printf("company %d: %s - Rate: %.2f\n", i + 1, companies->company[i].name, companies->company[i].rate);
     }
-}void lastComments(COMPANIES company, COMMENTS comments, int numComments) {
+}
+/**
+ * Displays the last N comments.
+ *
+ * This function displays the last N comments related to a specific company.
+ *
+ * @param companies Pointer to the COMPANIES.
+ * @param comments Pointer to the COMMENTS.
+ * @param numComments The number of comments to display.
+ */
+void lastComments(COMPANIES company, COMMENTS comments, int numComments) {
     printf("Last %d Comments :\n", numComments);
 
     int begin = comments.count - numComments;
@@ -220,6 +326,16 @@ void print_best_comp(COMPANIES *companies){
         }
     }
 }
+/**
+ * Initiates the display of the last N comments .
+ *
+ * This function initiates the process of displaying the last N comments by asking
+ * the user for the number of comments and calling the
+ * lastComments function.
+ *
+ * @param companies Pointer to the COMPANIES .
+ * @param comments Pointer to the COMMENTS.
+ */
 void lastComment(COMPANIES companies,COMMENTS comments){
 
     int num=0;

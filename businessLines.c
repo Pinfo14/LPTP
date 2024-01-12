@@ -1,14 +1,35 @@
 
+/**
+* @file businessLines.c
+* @author Emanuel Pinto
+* @date 20-12-2023
+* @version 1
+*
+* @brief Implementation of functions for managing business lines.
+*
+* This file contains the implementation of functions for managing business lines,
+* including printing, listing, searching, inserting, and updating business lines.
+*/
 
 #include "businessLines.h"
 #include "stdlib.h"
 #include "stdio.h"
 #include "input.h"
 #include "company.h"
-
+/**
+ * @brief Prints the details of a business line.
+ *
+ * @param busLine The BUSINESS LINE structure representing a business line.
+ */
 void printBusLine(BUS_LINE busLine) {
     printf("\n%d   %s\n   ",busLine.id,busLine.name);
 }
+
+/**
+ * @brief Lists all the available business lines.
+ *
+ * @param business A pointer to the BUSINESS structure representing the list of business lines.
+ */
 void listBusLine(BUSINESS *business){
     if (business->count > 0) {
         int i;
@@ -19,6 +40,14 @@ void listBusLine(BUSINESS *business){
         puts("ja foste");
     }
 }
+
+/**
+ * @brief Searches for a business line by its ID.
+ *
+ * @param business A BUSINESS structure .
+ * @param id The ID of the business line to search for.
+ * @return The position of the business line in the array (-1 if not found).
+ */
 int searchBus(BUSINESS business, int id) {
     int i;
     for (i = 0; i < business.count; i++) {
@@ -29,7 +58,12 @@ int searchBus(BUSINESS business, int id) {
     return -1;
 }
 
-//INSERT COMP
+/**
+ * @brief Inserts a new business line into the list of business lines.
+ *
+ * @param business A pointer to the BUSINESS .
+ * @return The position of the inserted business line in the array (-1 if insertion failed).
+ */
 int insertBusLines(BUSINESS *business) {
     int id;
     id= getInt(NIF_MIN,NIF_MAX,ID_MSG);
@@ -46,7 +80,11 @@ int insertBusLines(BUSINESS *business) {
 
 }
 
-
+/**
+ * @brief Inserts a new business line into the list of business lines, checking for capacity.
+ *
+ * @param business A pointer to the BUSINESS .
+ */
 void insertBusLine(BUSINESS *business) {
     if (business->count < 5) {
         if (insertBusLines(business) == -1) {
@@ -56,10 +94,20 @@ void insertBusLine(BUSINESS *business) {
         puts(ERROR);
     }
 }
-
+/**
+ * @brief Updates the details of a business line.
+ *
+ * @param business A pointer to the BUSINESS LINE .
+ */
 void updateBusLines(BUS_LINE *business){
     getString(business->name,CHAR_MAX,BUS_NAME);
 }
+
+/**
+ * @brief Updates the details of an existing business line.
+ *
+ * @param business A pointer to the BUSINESS .
+ */
 void updateBusLine(BUSINESS *business){
 
     int position =searchBus( *business,getInt(ID_MIN,ID_MAX,ID_MSG));

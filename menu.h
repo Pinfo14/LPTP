@@ -9,7 +9,7 @@
 * @brief A header file providing utility functions for the main menu.
 *
 * This  file contains a collection of functions designed to make the menu and interact with it
-* in a C or C++ program. It includes functions for all the menu
+* It includes functions for all the menu
 */
 
 #ifndef TP_LP_MENU_H

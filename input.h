@@ -9,7 +9,7 @@
 * @brief A header file providing utility functions for input control.
 *
 * This  file contains a collection of functions designed to help and control the user input
-* in a C or C++ program. It includes functions for get an integer, a sting
+* It includes functions for get an integer, a sting
 */
 
 #ifndef TP_LP_INPUT_H

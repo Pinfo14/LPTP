@@ -1,24 +1,23 @@
-//
-// Created by emanuel on 11-01-2024.
-//
+/**
+ *
+ * @file general.c
+ * @author Emanuel Pinto
+ * @date 11-01-2024
+ * @version 1
+ *
+ * Source file containing general functions.
+ */
 
 #include "general.h"
 
 
+/**
+ * Converts the numeric state (0 or 1) to INACTIVE or ACTIVE.
+ *
+ * @param state The numeric state(0 or 1).
+ * @return state.
+ */
 
-char *showCompName(int nif,COMPANIES **company){
-
-    char *name=(char*)malloc(sizeof(char)*10);
-    for (int i = 0;(*company)->count > i; ++i) {
-        if(nif ==(*company)->company[i].nif){
-            strcpy(name, (*company)->company[i].name);
-
-        }
-    }
-    return name;
-}
-
-// used to show de state INACTIVE or ACTIVE instead of 0 or 1
 char *showState(int state){
     char*stateChar=(char*) malloc(sizeof(char)*10 );
     switch (state) {
@@ -34,7 +33,12 @@ char *showState(int state){
     return stateChar;
 }
 
-// used to show de category name instead of the representative number
+/**
+ * Converts the numeric category (1, 2, or 3) to (1 for MICRO, 2 for PME, 3 for BIG) .
+ *
+ * @param catg The numeric category (1, 2, or 3) .
+ * @return category name.
+ */
 char *showCatg(int catg){
     char *catgName=(char*) malloc(sizeof(char)*10 );
     switch (catg) {
@@ -52,7 +56,18 @@ char *showCatg(int catg){
     }
     return catgName;
 }
-// used to show the category instead of the id
+
+
+/**
+ * Retrieves the name of a business line based on its ID.
+ *
+ * This function searches for a business line with a specific ID in the BUSINESS
+ * structure and returns its name.
+ *
+ * @param bl The ID of the business line.
+ * @param business Pointer to the BUSINESS structure containing business line information.
+ * @return business line name.
+ */
 char *showBLine(int bl,BUSINESS **business){
 
     char *name=(char*)malloc(sizeof(char)*10);
@@ -63,6 +78,15 @@ char *showBLine(int bl,BUSINESS **business){
     }
     return name;
 }
+
+
+/**
+ * Checks if a file is empty.
+ *
+ * @param filename The name of the file.
+ * @return -1 if the file is empty, 1 if not empty, or an error code if the file can't
+ * be opened.
+ */
 int isFileEmpty(const char *filename) {
     FILE *file = fopen(filename, "r");  // Open the file in read mode
 
@@ -83,6 +107,11 @@ int isFileEmpty(const char *filename) {
     }
 }
 
+/**
+ * @brief Exports business lines to a file.
+ *
+ * @param business Pointer to the BUSINESS structure containing business line information.
+ */
 void exportBusinessLines(BUSINESS *business) {
     FILE *fp;
     int i;
@@ -102,6 +131,11 @@ void exportBusinessLines(BUSINESS *business) {
     }
 }
 
+/**
+ * @brief Imports business lines from a file.
+ *
+ * @param business Pointer to the BUSINESS structure where business line information will be stored.
+ */
 void importBusinessLines(BUSINESS *business) {
     FILE *fp;
 
@@ -122,6 +156,11 @@ void importBusinessLines(BUSINESS *business) {
     }
 }
 
+/**
+ * @brief Exports comments to a file.
+ *
+ * @param comments Pointer to the COMMENTS structure containing comment information.
+ */
 void exportComments(COMMENTS *comments) {
     FILE *fp;
     int i;
@@ -141,6 +180,11 @@ void exportComments(COMMENTS *comments) {
     }
 }
 
+/**
+ * @brief Imports comments from a file.
+ *
+ * @param comments Pointer to the COMMENTS structure where comment information will be stored.
+ */
 void importComments(COMMENTS *comments) {
     FILE *fp;
 
@@ -161,6 +205,11 @@ void importComments(COMMENTS *comments) {
     }
 }
 
+/**
+ * @brief Exports companies to a file.
+ *
+ * @param companies Pointer to the COMPANIES structure containing company information.
+ */
 void exportCompanies(COMPANIES *companies) {
     FILE *fp;
     int i;
@@ -191,6 +240,11 @@ void exportCompanies(COMPANIES *companies) {
     }
 }
 
+/**
+ * @brief Imports companies from a file.
+ *
+ * @param companies Pointer to the COMPANIES structure where company information will be stored.
+ */
 void importCompanies(COMPANIES *companies) {
     FILE *fp;
 
@@ -219,12 +273,27 @@ void importCompanies(COMPANIES *companies) {
         printf("Companies imported successfully.\n");
     }
 }
+
+/**
+ * @brief Initializes the program by importing data from files.
+ *
+ * @param companies Pointer to the COMPANIES structure.
+ * @param business Pointer to the BUSINESS structure.
+ * @param comments Pointer to the COMMENTS structure.
+ */
 void initializeProgram(COMPANIES *companies, BUSINESS *business, COMMENTS *comments) {
     importBusinessLines(business);
     importCompanies(companies);
     importComments(comments);
 }
 
+/**
+ * @brief Exports all data (companies, business lines, comments) to respective files.
+ *
+ * @param companies Pointer to the COMPANIES structure.
+ * @param business Pointer to the BUSINESS structure.
+ * @param comments Pointer to the COMMENTS structure.
+ */
 void exportData(COMPANIES *companies, BUSINESS *business, COMMENTS *comments) {
     exportCompanies(companies);
     exportBusinessLines(business);

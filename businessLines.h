@@ -9,7 +9,7 @@
 * @brief A header file providing utility functions for business line management.
 *
 * This  file contains a collection of functions designed to manage the business lines
-* in a C or C++ program. It includes functions for create, delete,update and read  lines of business
+* It includes functions for create, delete,update and read  lines of business
 */
 
 #ifndef TP_LP_BUSINESSLINES_H

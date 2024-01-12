@@ -1,7 +1,14 @@
-//
-// Created by emanuel on 11-01-2024.
-//
-
+/**
+* @file search.h
+* @author Emanuel Pinto
+* @date 11-01-2024
+* @version 1
+*
+* @brief Header file providing functions for searching and retrieving company information.
+*
+* This file contains a collection of functions designed to search and retrieve information
+* about companies based on different criteria such as name, business line, and postal code.
+*/
 #ifndef LPTP_SEARCH_H
 #define LPTP_SEARCH_H
 #include "company.h"

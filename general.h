@@ -1,6 +1,14 @@
-//
-// Created by emanuel on 11-01-2024.
-//
+/**
+* @file general.h
+* @author Emanuel Pinto
+* @date 11-01-2024
+* @version 1
+*
+* @brief A header file providing general utility functions for program management.
+*
+* This file contains a collection of general utility functions for managing the overall program.
+* It includes functions for handling companies, business lines, search operations, and file I/O.
+*/
 
 #ifndef LPTP_GENERAL_H
 #define LPTP_GENERAL_H
@@ -15,7 +23,6 @@
 #define BUSINESS_FILENAME "/home/emanuel/Desktop/1ºSemestre/LPTP/data/dataBL.txt"
 #define COMMENTS_FILENAME "/home/emanuel/Desktop/1ºSemestre/LPTP/data/dataComm.txt"
 
-char *showCompName(int nif,COMPANIES **company);
 char *showState(int state);
 char *showCatg(int catg);
 char *showBLine(int bl,BUSINESS **business);
