@@ -65,6 +65,7 @@ void adminMenu(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RATIN
         printf("2. Manage business lines\n");
         printf("3. Reports\n");
         printf("5. Go back\n");
+        printf("0. EXIT\n");
         printf("CHOOSE OPTION: ");
         scanf("%d", &op);
         switch (op) {
@@ -84,7 +85,10 @@ void adminMenu(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RATIN
                 puts(ERROR);
         }
     } while (op != 0);
-
+    exportComments(*comments);
+    exportBline(*business);
+    exportCompanies(*company);
+    exit(1);
 }
 
 /**
@@ -103,6 +107,7 @@ void reportMenu(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RATI
         printf("1. Last Comments\n");
         printf("2. Best companies\n");
         printf("3. Go back\n");
+        printf("0. EXIT\n");
         printf("CHOOSE OPTION: ");
         scanf("%d", &op);
         switch (op) {
@@ -121,7 +126,10 @@ void reportMenu(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RATI
                 puts(ERROR);
         }
     } while (op != 0);
-
+    exportComments(*comments);
+    exportBline(*business);
+    exportCompanies(*company);
+    exit(1);
 }
 
 /**
@@ -142,6 +150,7 @@ void manageComp(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RATI
         printf("3. List\n");
         printf("4. Delete\n");
         printf("5. Go back\n");
+        printf("0. EXIT\n");
         printf("CHOOSE OPTION: ");
         scanf("%d", &op);
         switch (op) {
@@ -168,7 +177,10 @@ void manageComp(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RATI
                 puts(ERROR);
         }
     } while (op != 0);
-
+    exportComments(*comments);
+    exportBline(*business);
+    exportCompanies(*company);
+    exit(1);
 }
 
 /**
@@ -189,6 +201,7 @@ void manageBusLine(COMPANIES *company, BUSINESS *business, COMMENTS *comments, R
         printf("3. List\n");
         printf("4. Delete\n");
         printf("5. Go back\n");
+        printf("0. EXIT\n");
         printf("CHOOSE OPTION: ");
         scanf("%d", &op);
         switch (op) {
@@ -215,7 +228,10 @@ void manageBusLine(COMPANIES *company, BUSINESS *business, COMMENTS *comments, R
                 puts(ERROR);
         }
     } while (op != 0);
-
+    exportComments(*comments);
+    exportBline(*business);
+    exportCompanies(*company);
+    exit(1);
 }
 
 /**
@@ -232,6 +248,7 @@ void userMenu(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RATING
         printf("\nUSER MENU\n");
         printf("1. Search company\n");
         printf("2. Go back\n");
+        printf("0. EXIT\n");
         printf("CHOOSE OPTION: ");
         scanf("%d", &userOp);
 
@@ -246,7 +263,10 @@ void userMenu(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RATING
                 puts(ERROR);
         }
     } while (userOp != 0);
-
+    exportComments(*comments);
+    exportBline(*business);
+    exportCompanies(*company);
+    exit(1);
 }
 
 /**
@@ -264,6 +284,7 @@ void rateComMenu(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RAT
         printf("1. Rate company\n");
         printf("2. Comment company\n");
         printf("3. Go back\n");
+        printf("0. EXIT\n");
         printf("CHOOSE OPTION: ");
         scanf("%d", &userOp);
         switch (userOp) {
@@ -282,7 +303,10 @@ void rateComMenu(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RAT
                 puts(ERROR);
         }
     } while (userOp != 0);
-
+    exportComments(*comments);
+    exportBline(*business);
+    exportCompanies(*company);
+    exit(1);
 }
 
 /**
@@ -301,6 +325,7 @@ void searchMenu(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RATI
         printf("2. Business Line\n");
         printf("3. Postal Code\n");
         printf("4. Go Back\n");
+        printf("0. EXIT\n");
         printf("CHOOSE OPTION: ");
         scanf("%d", &userOp);
         switch (userOp) {
@@ -323,5 +348,8 @@ void searchMenu(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RATI
                 puts(ERROR);
         }
     } while (userOp != 0);
-
+    exportComments(*comments);
+    exportBline(*business);
+    exportCompanies(*company);
+    exit(1);
 }
