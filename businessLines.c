@@ -15,6 +15,7 @@
 #include "stdio.h"
 #include "input.h"
 #include "string.h"
+#include "general.h"
 
 /**
  * @brief Prints the details of a business line.
@@ -98,6 +99,8 @@ void insertBusLine(BUSINESS *business) {
     if (business->count < 5) {
         if (insertBusLines(business) == -1) {
             puts(ERROR);
+        }else {
+            exportBline(*business);
         }
     } else {
         puts(ERROR);

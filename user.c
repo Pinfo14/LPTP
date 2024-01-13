@@ -11,6 +11,7 @@
 */
 
 #include "user.h"
+#include "general.h"
 
 /**
  * @brief Inserts a comment for a specific company.
@@ -44,6 +45,8 @@ int insertCom(COMMENTS *comment, COMPANIES companies) {
 void insertComm(COMMENTS *comment, COMPANIES companies) {
     if (insertCom(comment, companies) == -1) {
         puts(ERROR);
+    }else{
+        exportComments(*comment);
     }
 }
 

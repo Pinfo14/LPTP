@@ -12,6 +12,7 @@
 #include "company.h"
 #include "input.h"
 #include "search.h"
+#include "general.h"
 
 /**
  * This function prints the user name, email, and comment for each comment associated
@@ -136,9 +137,11 @@ int insertComps(COMPANIES *companies,BUSINESS *business,RATINGS *ratings) {
  * @param ratings Pointer to the RATINGS structure.
  */
 void insertComp(COMPANIES *companies,BUSINESS *business,RATINGS *ratings) {
-    if (companies->count < 10) {
+    if (companies->count < INITIAL_SIZE) {
         if (insertComps(companies,business,ratings) == -1) {
             puts(ERROR);
+        }else {
+            exportCompanies(*companies);
         }
     } else {
         puts(ERROR);

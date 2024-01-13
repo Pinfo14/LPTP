@@ -82,134 +82,168 @@ char *showBLine(int bl,BUSINESS **business){
 /**
  * @brief Exports business lines to a file.
  *
- * @param business Pointer to the BUSINESS structure containing business line information.
+ * @param business  BUSINESS structure .
  */
-void exportBusinessLines(BUSINESS *business) {
+
+void exportBline(BUSINESS business) {
     FILE *fp;
     int i;
 
     fp = fopen(BUSINESS_FILENAME, "w");
     if (fp == NULL) {
-        printf(ERROR);
-
-    } else {
-        fprintf(fp, "%d\n", business->count);
-        for (i = 0; i < business->count; i++) {
-            fprintf(fp, "%d,%s\n", business->business[i].id, business->business[i].name);
-        }
-
-        fclose(fp);
-        printf("Business lines exported successfully.\n");
+        printf("File not found.");
     }
+
+
+    fprintf(fp,"%d\n", business.count);
+    for (i = 0; i < business.count; i++) {
+
+        fprintf(fp, "%d,%s,%d\n",
+                business.business[i].id,
+                business.business[i].name,
+                business.business[i].state);
+    }
+
+    fclose(fp);
+    printf("Bl exported");
+
 }
 
+
 /**
- * @brief Imports business lines from a file.
+ * @brief Imports companies from a file.
  *
- * @param business Pointer to the BUSINESS structure where business line information will be stored.
+ * @param comments Pointer to the COMMENTS structure.
  */
-void importBusinessLines(BUSINESS *business) {
+void importBl(BUSINESS *business) {
     FILE *fp;
 
     fp = fopen(BUSINESS_FILENAME, "r");
     if (fp == NULL) {
+        fp = fopen(BUSINESS_FILENAME, "w");
         printf(ERROR);
     } else {
         fscanf(fp, "%d", &business->count);
 
-        business->business = (BUS_LINE *)realloc(business->business, sizeof(BUS_LINE) * (business->count + 1));
+
+
+        business->business = (BUS_LINE *)realloc(business->business, sizeof(BUS_LINE) * (business->count+2));
 
         for (int i = 0; i < business->count; ++i) {
-            fscanf(fp, "%d,%s\n", &business->business[i].id, business->business[i].name);
-        }
-        fclose(fp);
-        printf("Business lines imported \n");
-    }
-}
+            fscanf(fp,"%d,%[^,],%d\n",
+                   &business->business[i].id,
+                   business->business[i].name,
+                  & business->business[i].state);
 
-/**
- * @brief Exports comments to a file.
- *
- * @param comments Pointer to the COMMENTS structure containing comment information.
- */
-void exportComments(COMMENTS *comments) {
-    FILE *fp;
-    int i;
-
-    fp = fopen(COMMENTS_FILENAME, "w");
-    if (fp == NULL) {
-        printf(ERROR);
-
-    } else {
-        fprintf(fp, "%d\n", comments->count);
-        for (i = 0; i < comments->count; i++) {
-            fprintf(fp, "%s,%s,%s,%d\n", comments->comment[i].userName, comments->comment[i].userEmail, comments->comment[i].comment, comments->comment[i].compNif);
-        }
-
-        fclose(fp);
-        printf("Comments exported .\n");
-    }
-}
-
-/**
- * @brief Imports comments from a file.
- *
- * @param comments Pointer to the COMMENTS structure where comment information will be stored.
- */
-void importComments(COMMENTS *comments) {
-    FILE *fp;
-
-    fp = fopen(COMMENTS_FILENAME, "r");
-    if (fp == NULL) {
-        printf(ERROR);
-    } else {
-        fscanf(fp, "%d", &comments->count);
-
-        // Allocate memory for the comment array
-        comments->comment = (COMMENT *)realloc(comments->comment, sizeof(COMMENT) * (comments->count + 1));
-
-        for (int i = 0; i < comments->count; ++i) {
-            fscanf(fp, "%s,%s,%s,%d\n", comments->comment[i].userName, comments->comment[i].userEmail, comments->comment[i].comment, &comments->comment[i].compNif);
         }
         fclose(fp);
         printf("Comments imported .\n");
     }
 }
 
+
 /**
  * @brief Exports companies to a file.
  *
- * @param companies Pointer to the COMPANIES structure containing company information.
+ * @param comments COMMENTS structure.
  */
-void exportCompanies(COMPANIES *companies) {
+
+void exportComments(COMMENTS comments) {
+    FILE *fp;
+    int i;
+
+    fp = fopen(COMMENTS_FILENAME, "w");
+    if (fp == NULL) {
+        printf("File not found.");
+    }
+
+
+    fprintf(fp,"%d\n", comments.count);
+    for (i = 0; i < comments.count; i++) {
+
+        fprintf(fp, "%d,%s,%s,%s\n",
+                comments.comment[i].compNif,
+                comments.comment[i].userName,
+                comments.comment[i].userEmail,
+                comments.comment[i].comment);
+    }
+
+    fclose(fp);
+    printf("COmments exported");
+
+}
+
+
+/**
+ * @brief Imports companies from a file.
+ *
+ * @param comments Pointer to the COMMENTS structure.
+ */
+void importComments(COMMENTS *comments) {
+    FILE *fp;
+
+    fp = fopen(COMMENTS_FILENAME, "r");
+    if (fp == NULL) {
+        fp = fopen(COMMENTS_FILENAME, "w");
+        printf(ERROR);
+    } else {
+        fscanf(fp, "%d", &comments->count);
+
+
+
+        comments->comment = (COMMENT *)realloc(comments->comment, sizeof(COMMENT) * (comments->count+2));
+
+        for (int i = 0; i < comments->count; ++i) {
+            fscanf(fp,"%d,%[^,],%[^,],%[^,]\n",
+                   &comments->comment[i].compNif,
+                   comments->comment[i].userName,
+                   comments->comment[i].userEmail,
+                   comments->comment[i].comment);
+
+        }
+        fclose(fp);
+        printf("Comments imported .\n");
+    }
+}
+
+
+/**
+ * @brief Exports companies to a file.
+ *
+ * @param companies  COMPANIES struct.
+ */
+
+void exportCompanies(COMPANIES companies) {
     FILE *fp;
     int i;
 
     fp = fopen(FILENAME_COMP, "w");
     if (fp == NULL) {
-        printf(ERROR);
+        printf("File not found.");
+    }
 
-    } else {
-        fprintf(fp, "%d\n", companies->count);
-        for (i = 0; i < companies->count; i++) {
 
-            fprintf(fp, "%d,%s,%d,%d,%s,%s,%s,%d,%f\n",
-                    companies->company[i].nif,
-                    companies->company[i].name,
-                    companies->company[i].category,
-                    companies->company[i].business_line,
-                    companies->company[i].address.city,
-                    companies->company[i].address.street,
-                    companies->company[i].address.cp,
-                    companies->company[i].state,
-                    companies->company[i].rate);
+        fprintf(fp,"%d\n", companies.count);
+        for (i = 0; i < companies.count; i++) {
+
+            fprintf(fp, "%d,%s,%d,%d,%s,%s,%s,%d,%.2f\n",
+                    companies.company[i].nif,
+                    companies.company[i].name,
+                    companies.company[i].category,
+                    companies.company[i].business_line,
+                    companies.company[i].address.city,
+                    companies.company[i].address.street,
+                    companies.company[i].address.cp,
+                    companies.company[i].state,
+                    companies.company[i].rate);
+
         }
 
         fclose(fp);
-        printf("NIIICE");
+        printf("Files exported");
 
     }
-}
+
 
 /**
  * @brief Imports companies from a file.
@@ -221,15 +255,15 @@ void importCompanies(COMPANIES *companies) {
 
     fp = fopen(FILENAME_COMP, "r");
     if (fp == NULL) {
+        fp = fopen(FILENAME_COMP, "w");
         printf(ERROR);
     } else {
-        fscanf(fp, "%d", &companies->count);
+      fscanf(fp, "%d", &companies->count);
 
-        // Allocate memory for the company array
-        companies->company = (COMPANY *)realloc(companies->company, sizeof(COMPANY) * (companies->count+1));
+        companies->company = (COMPANY *)realloc(companies->company, sizeof(COMPANY) * (companies->count+2));
 
         for (int i = 0; i < companies->count; ++i) {
-            fscanf(fp, "%d,%s,%d,%d,%s,%s,%s,%d,%f\n",
+         fscanf(fp, "%d,%[^,],%d,%d,%[^,],%[^,],%[^,],%d,%f\n",
                    &companies->company[i].nif,
                    companies->company[i].name,
                    &companies->company[i].category,
@@ -239,34 +273,9 @@ void importCompanies(COMPANIES *companies) {
                    companies->company[i].address.cp,
                    &companies->company[i].state,
                    &companies->company[i].rate);
+
         }
         fclose(fp);
-        printf("Companies imported successfully.\n");
+        printf("Companies imported .\n");
     }
-}
-
-/**
- * @brief Initializes the program by importing data from files.
- *
- * @param companies Pointer to the COMPANIES structure.
- * @param business Pointer to the BUSINESS structure.
- * @param comments Pointer to the COMMENTS structure.
- */
-void import(COMPANIES *companies, BUSINESS *business, COMMENTS *comments) {
-    importBusinessLines(business);
-    importCompanies(companies);
-    importComments(comments);
-}
-
-/**
- * @brief Exports all data (companies, business lines, comments) to respective files.
- *
- * @param companies Pointer to the COMPANIES structure.
- * @param business Pointer to the BUSINESS structure.
- * @param comments Pointer to the COMMENTS structure.
- */
-void export(COMPANIES *companies, BUSINESS *business, COMMENTS *comments) {
-    exportCompanies(companies);
-    exportBusinessLines(business);
-    exportComments(comments);
 }

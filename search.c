@@ -83,7 +83,7 @@ void searchCompByName(COMPANIES *companies, BUSINESS *business) {
             printf("NIF: %d\n", companies->company[i].nif);
             printf("Name: %s\n", companies->company[i].name);
             printf("Category: %s\n", showCatg(companies->company[i].category));
-            printf("Business line: %s\n", showBLine(companies->company[i].business_line, business));
+            printf("Business line: %s\n", showBLine(companies->company[i].business_line, &business));
         }
     }
 }
@@ -106,7 +106,7 @@ void searchComByBl(COMPANIES *companies, BUSINESS *business) {
             printf("NIF: %d\n", companies->company[i].nif);
             printf("Name: %s\n", companies->company[i].name);
             printf("Category: %s\n", showCatg(companies->company[i].category));
-            printf("Business line: %s\n", showBLine(companies->company[i].business_line, business));
+            printf("Business line: %s\n", showBLine(companies->company[i].business_line, &business));
         }
     }
 }
@@ -129,7 +129,7 @@ void searchCompByCP(COMPANIES *companies, BUSINESS *business) {
             printf("NIF: %d\n", companies->company[i].nif);
             printf("Name: %s\n", companies->company[i].name);
             printf("Category: %s\n", showCatg(companies->company[i].category));
-            printf("Business line: %s\n", showBLine(companies->company[i].business_line, business));
+            printf("Business line: %s\n", showBLine(companies->company[i].business_line, &business));
         }
     }
 }

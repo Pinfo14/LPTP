@@ -27,7 +27,14 @@
 char *showState(int state);
 char *showCatg(int catg);
 char *showBLine(int bl,BUSINESS **business);
-void import(COMPANIES *companies, BUSINESS *business, COMMENTS *comments);
-void export(COMPANIES *companies, BUSINESS *business, COMMENTS *comments);
+
+void  exportCompanies(COMPANIES companies);
+void importCompanies(COMPANIES *companies);
+
+void exportComments(COMMENTS comments);
+void importComments(COMMENTS *comments);
+
+void exportBline(BUSINESS business);
+void importBl(BUSINESS *business);
 
 #endif //LPTP_GENERAL_H
