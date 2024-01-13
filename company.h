@@ -41,6 +41,7 @@
 #define EMAIL_MSG "Enter your email: "
 #define COMMENT_MSG "Comment: "
 
+
 typedef enum{MICRO=1,PME,BIG}CATEGORY;
 typedef enum{INACTIVE,ACTIVE}STATE;
 

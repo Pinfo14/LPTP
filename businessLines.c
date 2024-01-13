@@ -12,7 +12,6 @@
 */
 
 #include "businessLines.h"
-#include "stdlib.h"
 #include "stdio.h"
 #include "input.h"
 #include "company.h"
@@ -72,7 +71,7 @@ int insertBusLines(BUSINESS *business) {
 
         business->business[business->count].id = id;
         getString(business->business[business->count].name,CHAR_MAX,BUS_NAME);
-
+        business->business[business->count].state= getInt(0,1,BUS_STATE);
         return business->count++;
     }
 
@@ -101,6 +100,7 @@ void insertBusLine(BUSINESS *business) {
  */
 void updateBusLines(BUS_LINE *business){
     getString(business->name,CHAR_MAX,BUS_NAME);
+    business->state= getInt(0,1,BUS_STATE);
 }
 
 /**
@@ -118,3 +118,40 @@ void updateBusLine(BUSINESS *business){
     }
 
 }
+
+
+void deleteBusLine(BUSINESS *business, COMPANIES *companies ) {
+    int connectedCompanies = 0;
+    int businessLineId = getInt(ID_MIN,ID_MAX,ID_MSG);
+
+    for (int i = 0; i < companies->count; i++) {
+        if (companies->company[i].business_line == businessLineId) {
+            connectedCompanies++;
+            companies->company[i].state = INACTIVE;
+        }
+    }
+
+    if (connectedCompanies == 0) {
+        for (int i = 0; i < business->count; i++) {
+            if (business->business[i].id == businessLineId) {
+                business->business[i] = business->business[business->count - 1];
+                business->count--;
+                printf("Business line deleted.\n");
+                return;
+            }
+        }
+    } else {
+
+        for (int i = 0; i < business->count; i++) {
+            if (business->business[i].id == businessLineId) {
+                business->business[i].state = INACTIVE;
+
+                printf("Business line connected companies set to inactive.\n");
+                return;
+            }
+        }
+    }
+
+    printf("Business line  not found.\n");
+}
+

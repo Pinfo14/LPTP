@@ -21,10 +21,10 @@
 char *showState(int state){
     char*stateChar=(char*) malloc(sizeof(char)*10 );
     switch (state) {
-        case 0:
+        case INACTIVE:
             strcpy(stateChar,"INACTIVE");
             break;
-        case 1:
+        case ACTIVE:
             strcpy(stateChar,"ACTIVE");
             break;
         default:
@@ -42,13 +42,13 @@ char *showState(int state){
 char *showCatg(int catg){
     char *catgName=(char*) malloc(sizeof(char)*10 );
     switch (catg) {
-        case 1:
+        case MICRO:
             strcpy(catgName,"Micro");
             break;
-        case 2:
+        case PME:
             strcpy(catgName,"PME");
             break;
-        case 3:
+        case BIG:
             strcpy(catgName,"Big");
             break;
         default:

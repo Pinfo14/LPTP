@@ -8,12 +8,10 @@
  * Source file containing all the functions about companies.
  */
 #include <stdio.h>
-#include <float.h>
 #include "stdlib.h"
-#include "string.h"
 #include "company.h"
 #include "input.h"
-#include "businessLines.h"
+
 #include "search.h"
 
 /**
@@ -266,16 +264,7 @@ void updateComps(COMPANIES *companies,BUSINESS *business) {
         puts("ERROR COMPANY NOT FOUND!!");
     }
 }
-//comments
 
-/*
-void printComm(COMMENTS *comment,COMPANIES *company){
-    int nif=comment->comment->compNif;
-    char *compName = showCompName(nif,&company);
-    printf("%s  %s  %s  %s", compName,comment->comment->userName,comment->comment->userEmail,comment->comment->comment);
-    free(compName);
-}*/
-/*
 void comp_rate(COMPANIES *companies) {
     for (int i = 0; i < companies->count - 1; i++) {
         for (int j = 0; j < companies->count - i - 1; j++) {
@@ -286,7 +275,7 @@ void comp_rate(COMPANIES *companies) {
             }
         }
     }
-}*/
+}
 
 /**
  * Prints the top three best-rated companies.

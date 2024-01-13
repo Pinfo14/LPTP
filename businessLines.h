@@ -14,14 +14,18 @@
 
 #ifndef TP_LP_BUSINESSLINES_H
 #define TP_LP_BUSINESSLINES_H
+#define BUS_STATE "Insert the state 0/1"
 #define  ID_MSG "Insert the  business line id: "
 #define BUS_NAME "Insert  business line name: "
 #define CHAR_MAX 100
 #define ID_MIN 1
 #define ID_MAX 9999
+#include "company.h"
+
 typedef struct {
     int id;
     char name[CHAR_MAX];
+    STATE state;
 }BUS_LINE;
 
 typedef struct {
@@ -33,5 +37,5 @@ typedef struct {
 void insertBusLine(BUSINESS *business);
 void updateBusLine(BUSINESS *business);
 void listBusLine(BUSINESS *business);
-
+void deleteBusLine(BUSINESS *business, COMPANIES *companies );
 #endif //TP_LP_BUSINESSLINES_H

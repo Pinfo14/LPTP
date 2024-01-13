@@ -18,6 +18,7 @@
 #include "company.h"
 #include "businessLines.h"
 #include "search.h"
+#include "user.h"
 #include "string.h"
 #define FILENAME_COMP "/home/emanuel/Desktop/1ºSemestre/LPTP/data/dataComp.txt"
 #define BUSINESS_FILENAME "/home/emanuel/Desktop/1ºSemestre/LPTP/data/dataBL.txt"

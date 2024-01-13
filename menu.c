@@ -207,7 +207,7 @@ void manageBusLine(COMPANIES *company, BUSINESS *business, COMMENTS *comments, R
                 manageBusLine(company, business, comments, ratings);
                 break;
             case 4:
-                // deleteComp(&companies);
+                deleteBusLine(business,company);
                 manageBusLine(company, business, comments, ratings);
                 break;
             case 5:
