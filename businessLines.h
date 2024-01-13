@@ -20,12 +20,12 @@
 #define CHAR_MAX 100
 #define ID_MIN 1
 #define ID_MAX 9999
-#include "company.h"
+
 
 typedef struct {
     int id;
     char name[CHAR_MAX];
-    STATE state;
+    int state;
 }BUS_LINE;
 
 typedef struct {
@@ -37,5 +37,5 @@ typedef struct {
 void insertBusLine(BUSINESS *business);
 void updateBusLine(BUSINESS *business);
 void listBusLine(BUSINESS *business);
-void deleteBusLine(BUSINESS *business, COMPANIES *companies );
+
 #endif //TP_LP_BUSINESSLINES_H

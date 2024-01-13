@@ -39,7 +39,7 @@ void mainMenu(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RATING
                 adminMenu(company, business, comments, ratings);
                 break;
             default:
-                printf("Invalid");
+                puts(ERROR);
         }
     } while (op != 0);
 
@@ -80,7 +80,7 @@ void adminMenu(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RATIN
                 mainMenu(company, business, comments, ratings);
                 break;
             default:
-                // Handle invalid option
+                puts(ERROR);
         }
     } while (op != 0);
     exit(1);
@@ -111,14 +111,14 @@ void reportMenu(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RATI
                 reportMenu(company, business, comments, ratings);
                 break;
             case 2:
-                print_best_comp(company);
+                printTopComp(company);
                 reportMenu(company, business, comments, ratings);
                 break;
             case 3:
                 adminMenu(company, business, comments, ratings);
                 break;
             default:
-                // Handle invalid option
+                puts(ERROR);
         }
     } while (op != 0);
     exit(1);
@@ -166,7 +166,7 @@ void manageComp(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RATI
                 adminMenu(company, business, comments, ratings);
                 break;
             default:
-                // Handle invalid option
+                puts(ERROR);
         }
     } while (op != 0);
     exit(1);
@@ -214,7 +214,7 @@ void manageBusLine(COMPANIES *company, BUSINESS *business, COMMENTS *comments, R
                 adminMenu(company, business, comments, ratings);
                 break;
             default:
-                // Handle invalid option
+                puts(ERROR);
         }
     } while (op != 0);
     exit(1);
@@ -246,7 +246,7 @@ void userMenu(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RATING
                 mainMenu(company, business, comments, ratings);
                 break;
             default:
-                printf("ERROR!!\n");
+                puts(ERROR);
         }
     } while (userOp != 0);
     exit(1);
@@ -283,7 +283,7 @@ void rateComMenu(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RAT
                 searchMenu(company, business, comments, ratings);
                 break;
             default:
-                printf("ERROR!!\n");
+                puts(ERROR);
         }
     } while (userOp != 0);
     exit(1);
@@ -325,7 +325,7 @@ void searchMenu(COMPANIES *company, BUSINESS *business, COMMENTS *comments, RATI
                 userMenu(company, business, comments, ratings);
                 break;
             default:
-                printf("ERROR!!\n");
+                puts(ERROR);
         }
     } while (userOp != 0);
     exit(1);

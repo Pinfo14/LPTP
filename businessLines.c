@@ -14,14 +14,24 @@
 #include "businessLines.h"
 #include "stdio.h"
 #include "input.h"
-#include "company.h"
+#include "string.h"
+
 /**
  * @brief Prints the details of a business line.
  *
  * @param busLine The BUSINESS LINE structure representing a business line.
  */
 void printBusLine(BUS_LINE busLine) {
-    printf("\n%d   %s\n   ",busLine.id,busLine.name);
+    char state[CHAR_MAX];
+    switch (busLine.state) {
+        case 1:
+            strcpy(state,"ACTIVE");
+            break;
+        case 2:
+            strcpy(state,"INACTIVE");
+            break;
+    }
+    printf("\n%d   %s   %s\n   ",busLine.id,busLine.name,state);
 }
 
 /**
@@ -45,7 +55,7 @@ void listBusLine(BUSINESS *business){
  *
  * @param business A BUSINESS structure .
  * @param id The ID of the business line to search for.
- * @return The position of the business line in the array (-1 if not found).
+ * @return The position of the array (-1 if not found).
  */
 int searchBus(BUSINESS business, int id) {
     int i;
@@ -65,7 +75,7 @@ int searchBus(BUSINESS business, int id) {
  */
 int insertBusLines(BUSINESS *business) {
     int id;
-    id= getInt(NIF_MIN,NIF_MAX,ID_MSG);
+    id= getInt(ID_MIN,ID_MAX,ID_MSG);
 
     if (searchBus(*business, id) == -1) {
 
@@ -117,41 +127,5 @@ void updateBusLine(BUSINESS *business){
         printf("ERROO NOT FOUND !!!");
     }
 
-}
-
-
-void deleteBusLine(BUSINESS *business, COMPANIES *companies ) {
-    int connectedCompanies = 0;
-    int businessLineId = getInt(ID_MIN,ID_MAX,ID_MSG);
-
-    for (int i = 0; i < companies->count; i++) {
-        if (companies->company[i].business_line == businessLineId) {
-            connectedCompanies++;
-            companies->company[i].state = INACTIVE;
-        }
-    }
-
-    if (connectedCompanies == 0) {
-        for (int i = 0; i < business->count; i++) {
-            if (business->business[i].id == businessLineId) {
-                business->business[i] = business->business[business->count - 1];
-                business->count--;
-                printf("Business line deleted.\n");
-                return;
-            }
-        }
-    } else {
-
-        for (int i = 0; i < business->count; i++) {
-            if (business->business[i].id == businessLineId) {
-                business->business[i].state = INACTIVE;
-
-                printf("Business line connected companies set to inactive.\n");
-                return;
-            }
-        }
-    }
-
-    printf("Business line  not found.\n");
 }
 

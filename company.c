@@ -5,18 +5,15 @@
  * @date 16-12-2023
  * @version 1
  *
- * Source file containing all the functions about companies.
+ * Source file with all the companies functions  .
  */
 #include <stdio.h>
 #include "stdlib.h"
 #include "company.h"
 #include "input.h"
-
 #include "search.h"
 
 /**
- * Displays comments related to a specific company based on its NIF.
- *
  * This function prints the user name, email, and comment for each comment associated
  * with the specific company NIF.
  *
@@ -32,9 +29,6 @@ void showCom(int nif,COMMENTS *comments){
     }
 }
 /**
- * Prints information about a company, including its business line, category,
- * address, state, and average rate.
- *
  * This function retrieves and displays information about a company, including business
  * line and category names instead of IDs. It also prints comments related to the
  * company.
@@ -56,8 +50,6 @@ void printComp(COMPANY company,BUSINESS *business,COMMENTS *comments) {
     free(state);
 }
 /**
- * Lists all companies along with detailed information and associated comments.
- *
  * This function lists all companies, including detailed information and comments.
  *
  * @param companies The COMPANIES structure .
@@ -66,8 +58,8 @@ void printComp(COMPANY company,BUSINESS *business,COMMENTS *comments) {
  */
 
 void listComp(COMPANIES companies,BUSINESS business,COMMENTS comments) {
-    int file=isFileEmpty(FILENAME_COMP);
-    if (companies.count > 0 || file!=-1) {
+
+    if (companies.count > 0 ) {
         int i;
         for (i = 0; i < companies.count; i++) {
             printComp(companies.company[i],&business,&comments);
@@ -76,17 +68,13 @@ void listComp(COMPANIES companies,BUSINESS business,COMMENTS comments) {
         puts("NO companies");
     }
 }
-
 /**
- * Inserts a business line ID into a company's business_line field .
- *
  * This function prompts the user to select a business line ID and inserts it into the
  * specified company's business_line.
  *
  * @param companies Pointer to the COMPANIES structure.
  * @param busLine Pointer to the BUSINESS structure .
  */
-
 
 void insertCompBus(COMPANIES *companies, BUSINESS *busLine) {
     int bus_line;
@@ -113,15 +101,13 @@ void insertCompBus(COMPANIES *companies, BUSINESS *busLine) {
     }
 }
 /**
- * Inserts a new company into the COMPANIES structure after verifying the NIF.
- *
  * This function ask the user for company information and inserts a new company into
  * the COMPANIES structure after verifying the NIF.
  *
  * @param companies Pointer to the COMPANIES structure.
  * @param business Pointer to the BUSINESS structure.
  * @param ratings Pointer to the RATINGS structure.
- * @return The index where the new company is inserted, or -1 if insertion fails.
+ * @return The position where the new company is inserted, or -1 if insertion fails.
  */
 int insertComps(COMPANIES *companies,BUSINESS *business,RATINGS *ratings) {
     int nif;
@@ -142,8 +128,6 @@ int insertComps(COMPANIES *companies,BUSINESS *business,RATINGS *ratings) {
 }
 
 /**
- * Initiates the insertion of a new company.
- *
  * This function initiates the process of inserting a new company by verifying the count
  * and calling the insertComps function.
  *
@@ -161,8 +145,6 @@ void insertComp(COMPANIES *companies,BUSINESS *business,RATINGS *ratings) {
     }
 }
 /**
- * Deletes a company from the COMPANIES structure based on its NIF.
- *
  * This function ask the user for a company NIF, searches for the company, and
  * deletes it. If the company has  comments, its state is changed to INACTIVE.
  *
@@ -170,34 +152,27 @@ void insertComp(COMPANIES *companies,BUSINESS *business,RATINGS *ratings) {
  * @param comments Pointer to the COMMENTS structure.
  */
 void deleteComp(COMPANIES *companies, COMMENTS *comments) {
-    int index = -1;
+    int position = -1;
     int nif = getInt(NIF_MIN,NIF_MAX,NIF_MSG);
     for (int i = 0; i < companies->count; i++) {
         if (companies->company[i].nif == nif) {
-            index = i;
-            break;
+            position = i;
         }
     }
-    if (index == -1) {
-        printf("Company not found.\n");
-        return;
+    if (position == -1) {
+        puts(NOT_FOUND);
     }
 
     for (int i = 0; i < comments->count; i++) {
         if (comments->comment[i].compNif == nif) {
-            companies->company[index].state = INACTIVE;
-            printf("Company with NIF %d have comments. The company state changed to INACTIVE.\n", nif);
-            return;
+            companies->company[position].state = INACTIVE;
         }
     }
-    companies->company[index] = companies->company[companies->count - 1];
+    companies->company[position] = companies->company[companies->count - 1];
     companies->count--;
 
-    printf("Company with NIF %d was deleted.\n", nif);
 }
 /**
- * Updates a company's business line based on user input.
- *
  * This function updates a company's business line by asking the user for a new
  * business line ID.
  *
@@ -227,8 +202,6 @@ void updateBLComp(COMPANY *company,BUSINESS *business){
     } while (found!=1);
 }
 /**
- * Updates a company's information based on user input.
- *
  * This function updates a company's information, including name, category, business
  * line, address, and state, based on user input.
  *
@@ -247,8 +220,6 @@ void updateComp(COMPANY *company,BUSINESS *business) {
     company->state= getInt(0,1,COMP_STATE);
 }
 /**
- * Initiates the update of a company's information.
- *
  * This function initiates the process of updating a company's information by searching
  * for the company based on its NIF and calling the updateComp function.
  *
@@ -261,30 +232,15 @@ void updateComps(COMPANIES *companies,BUSINESS *business) {
     if (position != -1) {
         updateComp(&companies->company[position], business);
     } else {
-        puts("ERROR COMPANY NOT FOUND!!");
+        puts(NOT_FOUND);
     }
 }
-
-void comp_rate(COMPANIES *companies) {
-    for (int i = 0; i < companies->count - 1; i++) {
-        for (int j = 0; j < companies->count - i - 1; j++) {
-            if (companies->company[j].rate < companies->company[j + 1].rate) {
-                COMPANY temp = companies->company[j];
-                companies->company[j] = companies->company[j + 1];
-                companies->company[j + 1] = temp;
-            }
-        }
-    }
-}
-
 /**
- * Prints the top three best-rated companies.
- *
  * This function prints the names and rates of the top three best-rated companies.
  *
  * @param companies Pointer to the COMPANIES.
  */
-void print_best_comp(COMPANIES *companies){
+void printTopComp(COMPANIES *companies){
 
     printf("\nTop3 Best Companies:\n");
     for (int i = 0; i <3; i++) {
@@ -292,19 +248,16 @@ void print_best_comp(COMPANIES *companies){
     }
 }
 /**
- * Displays the last N comments.
- *
  * This function displays the last N comments related to a specific company.
  *
  * @param companies Pointer to the COMPANIES.
  * @param comments Pointer to the COMMENTS.
- * @param numComments The number of comments to display.
+ * @param numComm The number of comments to display.
  */
-void lastComments(COMPANIES company, COMMENTS comments, int numComments) {
-    printf("Last %d Comments :\n", numComments);
+void lastComments(COMPANIES company, COMMENTS comments, int numComm) {
+    printf("Last %d Comments :\n", numComm);
 
-    int begin = comments.count - numComments;
-    begin = (begin < 0) ? 0 : begin;
+    int begin = comments.count - numComm;
 
     for (int i = begin; i < comments.count; i++) {
         if (comments.comment[i].compNif == company.company[i].nif) {
@@ -316,8 +269,6 @@ void lastComments(COMPANIES company, COMMENTS comments, int numComments) {
     }
 }
 /**
- * Initiates the display of the last N comments .
- *
  * This function initiates the process of displaying the last N comments by asking
  * the user for the number of comments and calling the
  * lastComments function.
@@ -333,3 +284,45 @@ void lastComment(COMPANIES companies,COMMENTS comments){
 
     lastComments(companies,comments,num);
 }
+/**
+ * This function deletes the specified business line identified by its ID.
+ * If there are connected companies, it sets the state of the business line to inactive
+ * and also sets the state of all connected companies to inactive.
+ *
+ * @param business Pointer to the BUSINESS struct containing business lines.
+ * @param companies Pointer to the COMPANIES struct containing companies.
+ */
+
+void deleteBusLine(BUSINESS *business, COMPANIES *companies ) {
+    int count = 0;
+    int buId = getInt(ID_MIN,ID_MAX,ID_MSG);
+
+    for (int i = 0; i < companies->count; i++) {
+        if (companies->company[i].business_line == buId) {
+            count++;
+            companies->company[i].state = INACTIVE;
+        }
+    }
+
+    if (count == 0) {
+        for (int i = 0; i < business->count; i++) {
+            if (business->business[i].id == buId) {
+                business->business[i] = business->business[business->count - 1];
+                business->count--;
+                return;
+            }
+        }
+    } else {
+
+        for (int i = 0; i < business->count; i++) {
+            if (business->business[i].id == buId) {
+                business->business[i].state = INACTIVE;
+                return;
+            }
+        }
+    }
+
+    puts(NOT_FOUND);
+}
+
+

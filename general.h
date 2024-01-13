@@ -27,7 +27,6 @@
 char *showState(int state);
 char *showCatg(int catg);
 char *showBLine(int bl,BUSINESS **business);
-int isFileEmpty(const char *filename);
 void initializeProgram(COMPANIES *companies, BUSINESS *business, COMMENTS *comments);
 void exportData(COMPANIES *companies, BUSINESS *business, COMMENTS *comments);
 

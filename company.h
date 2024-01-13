@@ -40,8 +40,7 @@
 #define NAME_MSG "Enter your name: "
 #define EMAIL_MSG "Enter your email: "
 #define COMMENT_MSG "Comment: "
-
-
+#define NOT_FOUND  "ERRO NOT FOUND"
 typedef enum{MICRO=1,PME,BIG}CATEGORY;
 typedef enum{INACTIVE,ACTIVE}STATE;
 
@@ -97,9 +96,9 @@ void deleteComp(COMPANIES *companies, COMMENTS *comments);
 void searchComp(COMPANIES companies,BUSINESS *business,COMMENTS comments);
 void listComp(COMPANIES companies,BUSINESS business,COMMENTS comments);
 void printComp(COMPANY company,BUSINESS *business,COMMENTS *comments);
-void print_best_comp(COMPANIES *companies);
+void printTopComp(COMPANIES *companies);
 void lastComment(COMPANIES companies,COMMENTS comments);
-
+void deleteBusLine(BUSINESS *business, COMPANIES *companies );
 
 
 #endif //LPTP_COMPANY_H
