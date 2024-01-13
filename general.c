@@ -91,7 +91,7 @@ void exportBline(BUSINESS business) {
 
     fp = fopen(BUSINESS_FILENAME, "w");
     if (fp == NULL) {
-        printf("File not found.");
+        printf(ERROR);
     }
 
 
@@ -105,15 +105,15 @@ void exportBline(BUSINESS business) {
     }
 
     fclose(fp);
-    printf("Bl exported");
+
 
 }
 
 
 /**
- * @brief Imports companies from a file.
+ * @brief Imports business lines from a file.
  *
- * @param comments Pointer to the COMMENTS structure.
+ * @param business Pointer to the BUSINESS structure.
  */
 void importBl(BUSINESS *business) {
     FILE *fp;
@@ -137,13 +137,13 @@ void importBl(BUSINESS *business) {
 
         }
         fclose(fp);
-        printf("Comments imported .\n");
+
     }
 }
 
 
 /**
- * @brief Exports companies to a file.
+ * @brief Exports comments to a file.
  *
  * @param comments COMMENTS structure.
  */
@@ -154,7 +154,7 @@ void exportComments(COMMENTS comments) {
 
     fp = fopen(COMMENTS_FILENAME, "w");
     if (fp == NULL) {
-        printf("File not found.");
+        printf(ERROR);
     }
 
 
@@ -169,7 +169,7 @@ void exportComments(COMMENTS comments) {
     }
 
     fclose(fp);
-    printf("COmments exported");
+
 
 }
 
@@ -202,7 +202,7 @@ void importComments(COMMENTS *comments) {
 
         }
         fclose(fp);
-        printf("Comments imported .\n");
+
     }
 }
 
@@ -219,7 +219,7 @@ void exportCompanies(COMPANIES companies) {
 
     fp = fopen(FILENAME_COMP, "w");
     if (fp == NULL) {
-        printf("File not found.");
+        printf(ERROR);
     }
 
 
@@ -240,15 +240,14 @@ void exportCompanies(COMPANIES companies) {
         }
 
         fclose(fp);
-        printf("Files exported");
+
 
     }
-
 
 /**
  * @brief Imports companies from a file.
  *
- * @param companies Pointer to the COMPANIES structure where company information will be stored.
+ * @param companies Pointer to the COMPANIES structure.
  */
 void importCompanies(COMPANIES *companies) {
     FILE *fp;
@@ -258,7 +257,7 @@ void importCompanies(COMPANIES *companies) {
         fp = fopen(FILENAME_COMP, "w");
         printf(ERROR);
     } else {
-      fscanf(fp, "%d", &companies->count);
+        fscanf(fp, "%d", &companies->count);
 
         companies->company = (COMPANY *)realloc(companies->company, sizeof(COMPANY) * (companies->count+2));
 
@@ -276,6 +275,14 @@ void importCompanies(COMPANIES *companies) {
 
         }
         fclose(fp);
-        printf("Companies imported .\n");
+
     }
 }
+
+
+
+
+
+
+
+

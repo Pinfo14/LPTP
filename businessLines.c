@@ -3,7 +3,7 @@
 * @file businessLines.c
 * @author Emanuel Pinto
 * @date 20-12-2023
-* @version 1
+* @version 3
 *
 * @brief Implementation of functions for managing business lines.
 *
@@ -47,7 +47,7 @@ void listBusLine(BUSINESS *business){
             printBusLine(business->business[i]);
         }
     } else {
-        puts("ja foste");
+        puts(NOT_FOUND);
     }
 }
 
@@ -96,16 +96,11 @@ int insertBusLines(BUSINESS *business) {
  * @param business A pointer to the BUSINESS .
  */
 void insertBusLine(BUSINESS *business) {
-    if (business->count < 5) {
         if (insertBusLines(business) == -1) {
             puts(ERROR);
-        }else {
-            exportBline(*business);
         }
-    } else {
-        puts(ERROR);
     }
-}
+
 /**
  * @brief Updates the details of a business line.
  *
@@ -127,7 +122,7 @@ void updateBusLine(BUSINESS *business){
     if(position !=-1) {
         updateBusLines(&business->business[position]);
     } else{
-        printf("ERROO NOT FOUND !!!");
+        puts(NOT_FOUND);
     }
 
 }

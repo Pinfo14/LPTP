@@ -20,9 +20,12 @@
 #include "search.h"
 #include "user.h"
 #include "string.h"
+#define INITIAL_SIZE 10
 #define FILENAME_COMP "/home/emanuel/Desktop/1ºSemestre/LPTP/data/dataComp.txt"
 #define BUSINESS_FILENAME "/home/emanuel/Desktop/1ºSemestre/LPTP/data/dataBL.txt"
 #define COMMENTS_FILENAME "/home/emanuel/Desktop/1ºSemestre/LPTP/data/dataComm.txt"
+#define NOT_FOUND  "ERRO NOT FOUND"
+#define EXIST "Already exist"
 
 char *showState(int state);
 char *showCatg(int catg);
@@ -36,5 +39,7 @@ void importComments(COMMENTS *comments);
 
 void exportBline(BUSINESS business);
 void importBl(BUSINESS *business);
+
+
 
 #endif //LPTP_GENERAL_H

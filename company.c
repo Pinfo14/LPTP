@@ -5,7 +5,7 @@
  * @date 16-12-2023
  * @version 1
  *
- * Source file with all the companies functions  .
+ * Source file with  the companies functions  .
  */
 #include <stdio.h>
 #include "stdlib.h"
@@ -137,11 +137,10 @@ int insertComps(COMPANIES *companies,BUSINESS *business,RATINGS *ratings) {
  * @param ratings Pointer to the RATINGS structure.
  */
 void insertComp(COMPANIES *companies,BUSINESS *business,RATINGS *ratings) {
-    if (companies->count < INITIAL_SIZE) {
+
+    if (companies->count <INITIAL_SIZE) {
         if (insertComps(companies,business,ratings) == -1) {
-            puts(ERROR);
-        }else {
-            exportCompanies(*companies);
+            puts(EXIST);
         }
     } else {
         puts(ERROR);
@@ -234,6 +233,7 @@ void updateComps(COMPANIES *companies,BUSINESS *business) {
 
     if (position != -1) {
         updateComp(&companies->company[position], business);
+
     } else {
         puts(NOT_FOUND);
     }

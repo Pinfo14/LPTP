@@ -2,7 +2,7 @@
 * @file businessLines.h
 * @author Emanuel Pinto
 * @date 20-12-2023
-* @version 1
+* @version 3
 *
 * @copyright Copyright (C) Emanuel 2023. All Rights MIT Licensed.
 *

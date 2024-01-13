@@ -38,9 +38,11 @@ int main() {
     ratings = (RATINGS*)malloc(sizeof(RATINGS) * INITIAL_SIZE);
     ratings->rating = (RATING*)malloc(sizeof(RATING) * INITIAL_SIZE);
     ratings->count = 0;
+
      importCompanies( companies);
      importBl(business);
      importComments(comments);
+
 
     mainMenu(companies, business, comments, ratings);
 

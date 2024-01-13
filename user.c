@@ -46,7 +46,7 @@ void insertComm(COMMENTS *comment, COMPANIES companies) {
     if (insertCom(comment, companies) == -1) {
         puts(ERROR);
     }else{
-        exportComments(*comment);
+        //exportComments(*comment);
     }
 }
 

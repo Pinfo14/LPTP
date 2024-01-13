@@ -15,7 +15,6 @@
 #ifndef TP_LP_COMPANY_H
 #define TP_LP_COMPANY_H
 #include "businessLines.h"
-#define INITIAL_SIZE 2
 #define CHAR_MAX 100
 #define NIF_MIN 1
 #define NIF_MAX 999999
@@ -40,7 +39,7 @@
 #define NAME_MSG "Enter your name: "
 #define EMAIL_MSG "Enter your email: "
 #define COMMENT_MSG "Comment: "
-#define NOT_FOUND  "ERRO NOT FOUND"
+
 typedef enum{MICRO=1,PME,BIG}CATEGORY;
 typedef enum{INACTIVE,ACTIVE}STATE;
 
