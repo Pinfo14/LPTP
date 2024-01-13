@@ -117,14 +117,13 @@ void importBusinessLines(BUSINESS *business) {
     } else {
         fscanf(fp, "%d", &business->count);
 
-        // Allocate memory for the business array
         business->business = (BUS_LINE *)realloc(business->business, sizeof(BUS_LINE) * (business->count + 1));
 
         for (int i = 0; i < business->count; ++i) {
             fscanf(fp, "%d,%s\n", &business->business[i].id, business->business[i].name);
         }
         fclose(fp);
-        printf("Business lines imported successfully.\n");
+        printf("Business lines imported \n");
     }
 }
 
@@ -148,7 +147,7 @@ void exportComments(COMMENTS *comments) {
         }
 
         fclose(fp);
-        printf("Comments exported successfully.\n");
+        printf("Comments exported .\n");
     }
 }
 
@@ -170,10 +169,10 @@ void importComments(COMMENTS *comments) {
         comments->comment = (COMMENT *)realloc(comments->comment, sizeof(COMMENT) * (comments->count + 1));
 
         for (int i = 0; i < comments->count; ++i) {
-            fscanf(fp, "%[^,],%[^,],%[^,],%d\n", comments->comment[i].userName, comments->comment[i].userEmail, comments->comment[i].comment, &comments->comment[i].compNif);
+            fscanf(fp, "%s,%s,%s,%d\n", comments->comment[i].userName, comments->comment[i].userEmail, comments->comment[i].comment, &comments->comment[i].compNif);
         }
         fclose(fp);
-        printf("Comments imported successfully.\n");
+        printf("Comments imported .\n");
     }
 }
 
@@ -253,7 +252,7 @@ void importCompanies(COMPANIES *companies) {
  * @param business Pointer to the BUSINESS structure.
  * @param comments Pointer to the COMMENTS structure.
  */
-void initializeProgram(COMPANIES *companies, BUSINESS *business, COMMENTS *comments) {
+void import(COMPANIES *companies, BUSINESS *business, COMMENTS *comments) {
     importBusinessLines(business);
     importCompanies(companies);
     importComments(comments);
@@ -266,7 +265,7 @@ void initializeProgram(COMPANIES *companies, BUSINESS *business, COMMENTS *comme
  * @param business Pointer to the BUSINESS structure.
  * @param comments Pointer to the COMMENTS structure.
  */
-void exportData(COMPANIES *companies, BUSINESS *business, COMMENTS *comments) {
+void export(COMPANIES *companies, BUSINESS *business, COMMENTS *comments) {
     exportCompanies(companies);
     exportBusinessLines(business);
     exportComments(comments);
